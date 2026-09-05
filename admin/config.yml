@@ -1,8 +1,8 @@
 backend:
   name: github
-  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME   # <-- change this
+  repo: lgrassu/harul-website,   # <-- change this
   branch: main
-  base_url: https://YOUR-WORKER-SUBDOMAIN.workers.dev   # <-- change this after deploying the Worker
+  base_url: https://harul-cms-login.lgrassu.workers.dev   # <-- change this after deploying the Worker
   auth_endpoint: auth
 
 # Where uploaded images go, and how the site links to them
