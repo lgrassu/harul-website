@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: lgrassu/harul-website,   # <-- change this
+  repo: lgrassu/harul-website   # <-- change this
   branch: main
   base_url: https://harul-cms-login.lgrassu.workers.dev   # <-- change this after deploying the Worker
   auth_endpoint: auth
