@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biserica Baptistă Harul — Grace Romanian Baptist Church, Sacramento</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Karla:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --sky: #E9F3FA;
+    --white: #FFFFFF;
+    --ink: #1F3A5F;
+    --ink-soft: #4A6178;
+    --sun: #F4B942;
+    --sun-deep: #E29A1F;
+    --wine: #A32638;
+    --leaf: #4C8C6B;
+    --line: #D8E6EF;
+    --radius: 14px;
+    --max: 1080px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Karla', sans-serif;
+    color:var(--ink);
+    background:var(--white);
+    line-height:1.6;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    margin:0 0 .4em 0;
+    line-height:1.15;
+    color:var(--ink);
+  }
+  a{color:inherit;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    font-family:'Karla',sans-serif;
+    font-weight:700;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    font-size:.72rem;
+    color:var(--wine);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:2px;
+    background:var(--sun-deep);
+    display:inline-block;
+  }
+
+  /* ---- folk-motif divider: a repeating diamond stitch, signature element ---- */
+  .stitch{
+    width:100%;
+    height:14px;
+    background-image:
+      linear-gradient(45deg, var(--wine) 25%, transparent 25%, transparent 75%, var(--wine) 75%),
+      linear-gradient(45deg, var(--wine) 25%, transparent 25%, transparent 75%, var(--wine) 75%);
+    background-size:14px 14px;
+    background-position:0 0, 7px 7px;
+    opacity:.85;
+  }
+  .stitch.gold{
+    background-image:
+      linear-gradient(45deg, var(--sun-deep) 25%, transparent 25%, transparent 75%, var(--sun-deep) 75%),
+      linear-gradient(45deg, var(--sun-deep) 25%, transparent 25%, transparent 75%, var(--sun-deep) 75%);
+  }
+
+  /* ---- nav ---- */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:var(--max); margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between;
+    gap:16px;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem;
+    text-decoration:none; color:var(--ink);
+  }
+  .brand .mark{
+    width:30px; height:30px; border-radius:50%;
+    background:conic-gradient(var(--sun) 0 25%, var(--wine) 25% 50%, var(--leaf) 50% 75%, var(--ink) 75% 100%);
+    flex:none;
+  }
+  nav.links{
+    display:flex; align-items:center; gap:22px; flex-wrap:wrap;
+  }
+  nav.links a{
+    text-decoration:none; font-weight:600; font-size:.92rem; color:var(--ink-soft);
+    padding:6px 2px; border-bottom:2px solid transparent;
+    transition:.15s;
+  }
+  nav.links a:hover, nav.links a:focus-visible{
+    color:var(--wine); border-bottom-color:var(--sun-deep);
+    outline:none;
+  }
+  .nav-toggle{display:none;}
+
+  /* ---- language toggle ---- */
+  .lang-toggle{
+    display:flex; border:1.5px solid var(--line); border-radius:999px; padding:3px; flex:none;
+  }
+  .lang-toggle button{
+    border:none; background:transparent; font-family:'Karla'; font-weight:700; font-size:.8rem;
+    padding:6px 14px; border-radius:999px; cursor:pointer; color:var(--ink-soft);
+  }
+  .lang-toggle button.active{ background:var(--wine); color:#fff; }
+
+  /* ---- hero ---- */
+  .hero{
+    background:
+      radial-gradient(circle at 85% 10%, rgba(244,185,66,.35), transparent 45%),
+      radial-gradient(circle at 5% 90%, rgba(76,140,107,.18), transparent 40%),
+      var(--sky);
+    padding:76px 0 60px;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.15fr .85fr; gap:48px; align-items:center;
+  }
+  .hero h1{
+    font-size:clamp(2.1rem, 4.2vw, 3.3rem);
+    font-weight:700;
+  }
+  .hero .sub-en{
+    font-style:italic; color:var(--ink-soft); font-size:1.05rem; margin-bottom:18px;
+  }
+  .hero p.lead{
+    font-size:1.08rem; color:var(--ink-soft); max-width:46ch; margin-bottom:26px;
+  }
+  .btn-row{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-block; text-decoration:none; font-weight:700; font-size:.95rem;
+    padding:13px 26px; border-radius:999px; transition:.15s transform ease, .15s box-shadow ease;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--wine); color:#fff; box-shadow:0 6px 18px rgba(163,38,56,.25);}
+  .btn-ghost{background:#fff; color:var(--ink); border:1.5px solid var(--line);}
+
+  .hero-card{
+    background:#fff; border-radius:var(--radius); padding:26px 28px;
+    box-shadow:0 14px 34px rgba(31,58,95,.12);
+    border-top:5px solid var(--sun);
+  }
+  .hero-card h3{font-size:1.05rem; margin-bottom:14px;}
+  .hero-card .time-row{
+    display:flex; justify-content:space-between; padding:9px 0;
+    border-bottom:1px dashed var(--line); font-size:.94rem;
+  }
+  .hero-card .time-row:last-child{border-bottom:none;}
+  .hero-card .time-row span:first-child{color:var(--ink-soft);}
+  .hero-card .time-row span:last-child{font-weight:700;}
+
+  /* ---- generic section ---- */
+  section{padding:64px 0;}
+  section.alt{background:var(--sky);}
+  .section-head{max-width:640px; margin-bottom:36px;}
+  .section-head h2{font-size:clamp(1.6rem, 3vw, 2.2rem);}
+
+  /* about */
+  .about-grid{display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:start;}
+  .about-grid p{color:var(--ink-soft); margin-bottom:14px;}
+  .values{display:grid; gap:16px; margin-top:20px;}
+  .value{
+    display:flex; gap:14px; align-items:flex-start;
+    background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px 18px;
+  }
+  .value .dot{
+    width:10px; height:10px; border-radius:50%; margin-top:6px; flex:none;
+  }
+  .value:nth-child(1) .dot{background:var(--wine);}
+  .value:nth-child(2) .dot{background:var(--sun-deep);}
+  .value:nth-child(3) .dot{background:var(--leaf);}
+  .value h4{margin:0 0 4px; font-family:'Karla'; font-size:.98rem;}
+  .value p{margin:0; font-size:.9rem; color:var(--ink-soft);}
+
+  /* service times */
+  .times-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .time-card{
+    background:#fff; border-radius:var(--radius); padding:26px 22px;
+    border:1px solid var(--line); position:relative; overflow:hidden;
+  }
+  .time-card::before{
+    content:""; position:absolute; top:0; left:0; right:0; height:6px;
+    background:var(--sun);
+  }
+  .time-card:nth-child(2)::before{background:var(--wine);}
+  .time-card:nth-child(3)::before{background:var(--leaf);}
+  .time-card .day{font-family:'Fraunces'; font-weight:600; font-size:1.15rem; margin-bottom:6px;}
+  .time-card .hour{font-size:1.5rem; font-weight:700; color:var(--wine); margin-bottom:8px;}
+  .time-card p{color:var(--ink-soft); font-size:.9rem; margin:0;}
+
+  /* events */
+  .events-list{display:grid; gap:14px;}
+  .event{
+    display:grid; grid-template-columns:84px 1fr; gap:20px; align-items:center;
+    background:#fff; border:1px solid var(--line); border-radius:12px; padding:16px 20px;
+  }
+  .event .date{
+    text-align:center; background:var(--sky); border-radius:10px; padding:10px 0;
+  }
+  .event .date .num{font-family:'Fraunces'; font-weight:700; font-size:1.5rem; color:var(--wine); display:block;}
+  .event .date .mon{font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft);}
+  .event h4{margin:0 0 4px; font-size:1rem;}
+  .event p{margin:0; font-size:.88rem; color:var(--ink-soft);}
+  .empty-note{color:var(--ink-soft); font-style:italic; font-size:.92rem;}
+
+  /* sermons */
+  .sermon-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  .sermon-card{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+  }
+  .sermon-thumb{
+    height:120px;
+    background:linear-gradient(135deg, var(--ink), var(--wine));
+    display:flex; align-items:center; justify-content:center;
+  }
+  .sermon-thumb .play{
+    width:44px; height:44px; border-radius:50%; background:rgba(255,255,255,.92);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .sermon-thumb .play::after{
+    content:""; border-left:12px solid var(--wine); border-top:8px solid transparent;
+    border-bottom:8px solid transparent; margin-left:3px;
+  }
+  .sermon-body{padding:16px 18px;}
+  .sermon-body .date{font-size:.78rem; color:var(--ink-soft); text-transform:uppercase; letter-spacing:.06em;}
+  .sermon-body h4{margin:6px 0 4px; font-size:1rem;}
+  .sermon-body p{margin:0; font-size:.88rem; color:var(--ink-soft);}
+
+  /* give */
+  .give-wrap{
+    background:linear-gradient(135deg, var(--wine), #7d1c2b);
+    border-radius:20px; padding:48px 44px; color:#fff;
+    display:grid; grid-template-columns:1.2fr .8fr; gap:36px; align-items:center;
+  }
+  .give-wrap h2{color:#fff;}
+  .give-wrap p{color:rgba(255,255,255,.85); max-width:48ch;}
+  .give-methods{display:grid; gap:12px;}
+  .give-method{
+    background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25);
+    border-radius:12px; padding:14px 18px; font-size:.92rem;
+  }
+  .give-method strong{display:block; font-family:'Fraunces'; font-size:1rem; margin-bottom:2px;}
+  .give-wrap .btn-primary{background:var(--sun); color:var(--ink); box-shadow:none;}
+
+  /* contact */
+  .contact-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:44px;}
+  .contact-info .row{display:flex; gap:14px; margin-bottom:20px;}
+  .contact-info .icon{
+    width:38px; height:38px; border-radius:10px; background:var(--sky);
+    display:flex; align-items:center; justify-content:center; flex:none;
+    font-weight:700; color:var(--wine);
+  }
+  .contact-info h4{margin:0 0 2px; font-size:.95rem;}
+  .contact-info p{margin:0; color:var(--ink-soft); font-size:.9rem;}
+  form.contact-form{
+    background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:28px;
+  }
+  form.contact-form label{
+    display:block; font-size:.82rem; font-weight:700; margin-bottom:6px; color:var(--ink-soft);
+  }
+  form.contact-form input, form.contact-form textarea{
+    width:100%; padding:11px 12px; border:1.5px solid var(--line); border-radius:8px;
+    font-family:'Karla'; font-size:.95rem; margin-bottom:16px; background:var(--sky);
+  }
+  form.contact-form input:focus, form.contact-form textarea:focus{
+    outline:2px solid var(--sun-deep); outline-offset:1px; border-color:var(--sun-deep);
+  }
+  form.contact-form textarea{resize:vertical; min-height:100px;}
+
+  footer{
+    background:var(--ink); color:rgba(255,255,255,.8); padding:36px 0 26px; text-align:center;
+    font-size:.86rem;
+  }
+  footer .brand{color:#fff; justify-content:center; margin-bottom:10px;}
+  footer a{color:#fff; text-decoration:underline;}
+
+  @media (max-width: 860px){
+    .hero-grid, .about-grid, .contact-grid{grid-template-columns:1fr;}
+    .times-grid, .sermon-grid{grid-template-columns:1fr;}
+    .give-wrap{grid-template-columns:1fr; padding:34px 26px;}
+    nav.links{display:none;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .btn{transition:none;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav-inner">
+    <a href="#top" class="brand"><span class="mark"></span> Biserica Baptistă Harul</a>
+    <nav class="links">
+      <a href="#despre" data-i18n="nav.despre">Despre noi</a>
+      <a href="#program" data-i18n="nav.program">Program</a>
+      <a href="#evenimente" data-i18n="nav.evenimente">Evenimente</a>
+      <a href="#predici" data-i18n="nav.predici">Predici</a>
+      <a href="#daruire" data-i18n="nav.daruire">Dăruire</a>
+      <a href="#contact" data-i18n="nav.contact">Contact</a>
+      <div class="lang-toggle">
+        <button type="button" data-lang-btn="ro" class="active">RO</button>
+        <button type="button" data-lang-btn="en">EN</button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<div class="stitch"></div>
+
+<section class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow" data-i18n="hero.eyebrow">Vă așteptăm cu drag</p>
+      <h1 data-i18n="hero.h1">Bine ați venit acasă.</h1>
+      <p class="sub-en">Grace Romanian Baptist Church — Biserica Baptistă Harul, Sacramento</p>
+      <p class="lead" data-i18n="hero.lead">Suntem o comunitate creștină baptistă română din Sacramento, unită prin credință, rugăciune și părtășie, după îndemnul din Coloseni 3:12 de a ne îmbrăca într-o inimă plină de îndurare și bunătate. Fie că ne vizitați pentru prima dată, fie că faceți parte din familia noastră de mulți ani, ne bucurăm să vă avem alături.</p>
+      <div class="btn-row">
+        <a href="#program" class="btn btn-primary" data-i18n="hero.btn1">Vezi programul serviciilor</a>
+        <a href="#contact" class="btn btn-ghost" data-i18n="hero.btn2">Ia legătura cu noi</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3 data-i18n="herocard.title">Duminica aceasta</h3>
+      <div class="time-row"><span data-i18n="herocard.row1">Serviciul de dimineață</span><span id="hero-time-am">9:30 – 12:00</span></div>
+      <div class="time-row"><span data-i18n="herocard.row2">Serviciul de seară</span><span id="hero-time-pm">5:00 – 6:30 PM</span></div>
+      <div class="time-row"><span data-i18n="herocard.row3">Video live pe YouTube</span><span>9:30 AM</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="stitch gold"></div>
+
+<section id="despre">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="despre.eyebrow">Cine suntem</p>
+      <h2 data-i18n="despre.h2">Despre biserica noastră</h2>
+    </div>
+    <div class="about-grid">
+      <div>
+        <p data-i18n="despre.p1">Biserica Baptistă Harul din Sacramento a luat naștere din dorința de a oferi comunității românești un loc de închinare, învățătură biblică și prietenie autentică. Slujim în limba română, păstrând legătura cu rădăcinile noastre, în timp ce construim punți către comunitatea din jur.</p>
+        <p data-i18n="despre.p2">Credem în puterea Cuvântului lui Dumnezeu, în rugăciune și în părtășia frățească. Fiecare familie, cuplu tânăr, copil sau persoană singură găsește aici un loc primitor.</p>
+      </div>
+      <div class="values">
+        <div class="value">
+          <span class="dot"></span>
+          <div><h4 data-i18n="value1.title">Credință biblică</h4><p data-i18n="value1.body">Predicare centrată pe Scriptură, în fiecare duminică.</p></div>
+        </div>
+        <div class="value">
+          <span class="dot"></span>
+          <div><h4 data-i18n="value2.title">Familie și comunitate</h4><p data-i18n="value2.body">Grupuri de părtășie, tineret și școală duminicală pentru toate vârstele.</p></div>
+        </div>
+        <div class="value">
+          <span class="dot"></span>
+          <div><h4 data-i18n="value3.title">Slujire cu bucurie</h4><p data-i18n="value3.body">Implicare activă în comunitate, misiune și ajutorare.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="program">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="program.eyebrow">Program</p>
+      <h2 data-i18n="program.h2">Orarul serviciilor</h2>
+    </div>
+    <div class="times-grid">
+      <div class="time-card">
+        <div class="day" data-i18n="card1.day">Duminică dimineața</div>
+        <div class="hour" id="program-sun-am">9:30 – 12:00</div>
+        <p data-i18n="card1.body">Serviciul de dimineață, cu predică, laudă și închinare. Transmis live pe YouTube.</p>
+      </div>
+      <div class="time-card">
+        <div class="day" data-i18n="card2.day">Duminică seara</div>
+        <div class="hour" id="program-sun-pm">5:00 – 6:30 PM</div>
+        <p data-i18n="card2.body">Serviciu de seară, într-o atmosferă mai intimă de închinare și rugăciune.</p>
+      </div>
+      <div class="time-card">
+        <div class="day" data-i18n="card3.day">Vineri</div>
+        <div class="hour" id="program-friday">7:00 – 8:00 PM</div>
+        <p data-i18n="card3.body">Studiu biblic și rugăciune în grupuri mici, pentru toate vârstele.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="evenimente">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="ev.eyebrow">Ce urmează</p>
+      <h2 data-i18n="ev.h2">Evenimente</h2>
+    </div>
+    <div class="events-list" id="events-list">
+      <p class="empty-note" data-i18n="ev.loading">Se încarcă evenimentele…</p>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="predici">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="pr.eyebrow">Ascultă din nou</p>
+      <h2 data-i18n="pr.h2">Predici recente</h2>
+    </div>
+    <div class="sermon-grid" id="sermon-grid">
+      <p class="empty-note" data-i18n="pr.loading">Se încarcă predicile…</p>
+    </div>
+  </div>
+</section>
+
+<section id="daruire">
+  <div class="wrap">
+    <div class="give-wrap">
+      <div>
+        <p class="eyebrow" style="color:var(--sun);" data-i18n="dr.eyebrow">Dăruire</p>
+        <h2 data-i18n="dr.h2">Susține lucrarea bisericii</h2>
+        <p data-i18n="dr.p">Darurile voastre susțin lucrarea de evanghelizare, întreținerea bisericii și ajutorarea familiilor din comunitate. Vă mulțumim pentru generozitate.</p>
+        <a href="#contact" class="btn btn-primary" style="margin-top:10px;" data-i18n="dr.btn">Vezi modalități de a dărui</a>
+      </div>
+      <div class="give-methods">
+        <div class="give-method"><strong data-i18n="dr.method1.strong">În timpul serviciului</strong><span data-i18n="dr.method1.body">Coșuri de dăruire disponibile duminica.</span></div>
+        <div class="give-method"><strong data-i18n="dr.method2.strong">Transfer bancar</strong><span data-i18n="dr.method2.body">Detalii disponibile la secretariatul bisericii.</span></div>
+        <div class="give-method"><strong data-i18n="dr.method3.strong">Online, prin PayPal</strong><a href="https://www.paypal.com/us/mrb/pal=WC5EWXNR7VAXS" target="_blank" rel="noopener" style="color:#fff; text-decoration:underline;" data-i18n="dr.method3.link">Donați online prin PayPal</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="contact">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow" data-i18n="ct.eyebrow">Ia legătura</p>
+      <h2 data-i18n="ct.h2">Contact</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="row">
+          <div class="icon">A</div>
+          <div><h4 data-i18n="ct.addressLabel">Adresă</h4><p id="contact-address">3832 Whitney Ave., Sacramento, CA 95821</p></div>
+        </div>
+        <div class="row">
+          <div class="icon">T</div>
+          <div><h4 data-i18n="ct.phoneLabel">Telefon</h4><p id="contact-phone">(916) 483-7744</p></div>
+        </div>
+        <div class="row">
+          <div class="icon">E</div>
+          <div><h4 data-i18n="ct.emailLabel">Email</h4><p id="contact-email">[completați emailul bisericii]</p></div>
+        </div>
+        <div class="row">
+          <div class="icon">D</div>
+          <div><h4 data-i18n="ct.scheduleLabel">Program</h4><p id="contact-schedule">Duminică 9:30–12:00 &amp; 5:00–6:30 PM · Vineri 7:00–8:00 PM</p></div>
+        </div>
+        <div class="row">
+          <div class="icon">S</div>
+          <div><h4 data-i18n="ct.socialLabel">Ne găsiți și pe</h4><p><a href="https://www.facebook.com/Grace-Romanian-Baptist-Church-282278018634444/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.youtube.com/channel/UCf5mfUpzylDw2VsaT_wyTCg" target="_blank" rel="noopener">YouTube</a> · <a href="https://vimeo.com/harulsac" target="_blank" rel="noopener">Vimeo</a></p></div>
+        </div>
+      </div>
+      <form class="contact-form" onsubmit="event.preventDefault(); this.querySelector('.sent').style.display='block';">
+        <label for="nume" data-i18n="form.nameLabel">Nume</label>
+        <input id="nume" type="text" data-i18n-placeholder="form.namePlaceholder" placeholder="Numele dvs." required>
+        <label for="email" data-i18n="form.emailLabel">Email</label>
+        <input id="email" type="email" data-i18n-placeholder="form.emailPlaceholder" placeholder="email@exemplu.com" required>
+        <label for="mesaj" data-i18n="form.messageLabel">Mesaj</label>
+        <textarea id="mesaj" data-i18n-placeholder="form.messagePlaceholder" placeholder="Cum vă putem ajuta?" required></textarea>
+        <button type="submit" class="btn btn-primary" style="border:none; cursor:pointer;" data-i18n="form.submit">Trimite mesajul</button>
+        <p class="sent" style="display:none; color:var(--leaf); font-weight:700; margin:14px 0 0;" data-i18n="form.sent">Mulțumim! Vă vom răspunde în curând.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<div class="stitch"></div>
+
+<footer>
+  <div class="wrap">
+    <a href="#top" class="brand"><span class="mark"></span> Biserica Baptistă Harul</a>
+    <p id="footer-address-phone">3832 Whitney Ave., Sacramento, CA 95821 · (916) 483-7744</p>
+    <p>&copy; 2026 Grace Romanian Baptist Church of Sacramento. <span data-i18n="footer.rights">Toate drepturile rezervate.</span></p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var I18N = {
+    ro: {
+      "nav.despre":"Despre noi","nav.program":"Program","nav.evenimente":"Evenimente","nav.predici":"Predici","nav.daruire":"Dăruire","nav.contact":"Contact",
+      "hero.eyebrow":"Vă așteptăm cu drag","hero.h1":"Bine ați venit acasă.",
+      "hero.lead":"Suntem o comunitate creștină baptistă română din Sacramento, unită prin credință, rugăciune și părtășie, după îndemnul din Coloseni 3:12 de a ne îmbrăca într-o inimă plină de îndurare și bunătate. Fie că ne vizitați pentru prima dată, fie că faceți parte din familia noastră de mulți ani, ne bucurăm să vă avem alături.",
+      "hero.btn1":"Vezi programul serviciilor","hero.btn2":"Ia legătura cu noi",
+      "herocard.title":"Duminica aceasta","herocard.row1":"Serviciul de dimineață","herocard.row2":"Serviciul de seară","herocard.row3":"Video live pe YouTube",
+      "despre.eyebrow":"Cine suntem","despre.h2":"Despre biserica noastră",
+      "despre.p1":"Biserica Baptistă Harul din Sacramento a luat naștere din dorința de a oferi comunității românești un loc de închinare, învățătură biblică și prietenie autentică. Slujim în limba română, păstrând legătura cu rădăcinile noastre, în timp ce construim punți către comunitatea din jur.",
+      "despre.p2":"Credem în puterea Cuvântului lui Dumnezeu, în rugăciune și în părtășia frățească. Fiecare familie, cuplu tânăr, copil sau persoană singură găsește aici un loc primitor.",
+      "value1.title":"Credință biblică","value1.body":"Predicare centrată pe Scriptură, în fiecare duminică.",
+      "value2.title":"Familie și comunitate","value2.body":"Grupuri de părtășie, tineret și școală duminicală pentru toate vârstele.",
+      "value3.title":"Slujire cu bucurie","value3.body":"Implicare activă în comunitate, misiune și ajutorare.",
+      "program.eyebrow":"Program","program.h2":"Orarul serviciilor",
+      "card1.day":"Duminică dimineața","card1.body":"Serviciul de dimineață, cu predică, laudă și închinare. Transmis live pe YouTube.",
+      "card2.day":"Duminică seara","card2.body":"Serviciu de seară, într-o atmosferă mai intimă de închinare și rugăciune.",
+      "card3.day":"Vineri","card3.body":"Studiu biblic și rugăciune în grupuri mici, pentru toate vârstele.",
+      "ev.eyebrow":"Ce urmează","ev.h2":"Evenimente","ev.loading":"Se încarcă evenimentele…","ev.empty":"Nu sunt evenimente programate momentan.",
+      "pr.eyebrow":"Ascultă din nou","pr.h2":"Predici recente","pr.loading":"Se încarcă predicile…","pr.empty":"Nu sunt predici disponibile momentan.",
+      "dr.eyebrow":"Dăruire","dr.h2":"Susține lucrarea bisericii",
+      "dr.p":"Darurile voastre susțin lucrarea de evanghelizare, întreținerea bisericii și ajutorarea familiilor din comunitate. Vă mulțumim pentru generozitate.",
+      "dr.btn":"Vezi modalități de a dărui",
+      "dr.method1.strong":"În timpul serviciului","dr.method1.body":"Coșuri de dăruire disponibile duminica.",
+      "dr.method2.strong":"Transfer bancar","dr.method2.body":"Detalii disponibile la secretariatul bisericii.",
+      "dr.method3.strong":"Online, prin PayPal","dr.method3.link":"Donați online prin PayPal",
+      "ct.eyebrow":"Ia legătura","ct.h2":"Contact",
+      "ct.addressLabel":"Adresă","ct.phoneLabel":"Telefon","ct.emailLabel":"Email","ct.scheduleLabel":"Program","ct.socialLabel":"Ne găsiți și pe",
+      "form.nameLabel":"Nume","form.namePlaceholder":"Numele dvs.","form.emailLabel":"Email","form.emailPlaceholder":"email@exemplu.com",
+      "form.messageLabel":"Mesaj","form.messagePlaceholder":"Cum vă putem ajuta?","form.submit":"Trimite mesajul",
+      "form.sent":"Mulțumim! Vă vom răspunde în curând.",
+      "footer.rights":"Toate drepturile rezervate."
+    },
+    en: {
+      "nav.despre":"About","nav.program":"Service Times","nav.evenimente":"Events","nav.predici":"Sermons","nav.daruire":"Give","nav.contact":"Contact",
+      "hero.eyebrow":"We'd love to welcome you","hero.h1":"Welcome home.",
+      "hero.lead":"We are a Romanian-speaking Baptist church family in Sacramento, united by faith, prayer, and fellowship, following the call of Colossians 3:12 to clothe ourselves with compassion and kindness. Whether this is your first visit or you've been part of our family for years, we're glad to have you with us.",
+      "hero.btn1":"See service times","hero.btn2":"Get in touch",
+      "herocard.title":"This Sunday","herocard.row1":"Morning service","herocard.row2":"Evening service","herocard.row3":"Live on YouTube",
+      "despre.eyebrow":"Who we are","despre.h2":"About our church",
+      "despre.p1":"Grace Romanian Baptist Church of Sacramento was founded out of a desire to give the Romanian community a place of worship, biblical teaching, and genuine friendship. We serve in the Romanian language, staying connected to our roots while building bridges to the wider community around us.",
+      "despre.p2":"We believe in the power of God's Word, in prayer, and in the fellowship of believers. Every family, young couple, child, or single person finds a welcoming place here.",
+      "value1.title":"Biblical faith","value1.body":"Scripture-centered preaching every Sunday.",
+      "value2.title":"Family & community","value2.body":"Fellowship groups, youth ministry, and Sunday school for all ages.",
+      "value3.title":"Joyful service","value3.body":"Active involvement in community, missions, and outreach.",
+      "program.eyebrow":"Schedule","program.h2":"Service Times",
+      "card1.day":"Sunday Morning","card1.body":"Morning service with preaching, praise, and worship. Streamed live on YouTube.",
+      "card2.day":"Sunday Evening","card2.body":"Evening service in a more intimate setting of worship and prayer.",
+      "card3.day":"Friday","card3.body":"Bible study and prayer in small groups, for all ages.",
+      "ev.eyebrow":"What's coming up","ev.h2":"Events","ev.loading":"Loading events…","ev.empty":"No events scheduled right now.",
+      "pr.eyebrow":"Listen again","pr.h2":"Recent Sermons","pr.loading":"Loading sermons…","pr.empty":"No sermons available right now.",
+      "dr.eyebrow":"Give","dr.h2":"Support the church's work",
+      "dr.p":"Your gifts support evangelism, the upkeep of the church, and helping families in our community. Thank you for your generosity.",
+      "dr.btn":"See ways to give",
+      "dr.method1.strong":"During the service","dr.method1.body":"Offering baskets available on Sundays.",
+      "dr.method2.strong":"Bank transfer","dr.method2.body":"Details available from the church office.",
+      "dr.method3.strong":"Online, via PayPal","dr.method3.link":"Donate online via PayPal",
+      "ct.eyebrow":"Get in touch","ct.h2":"Contact",
+      "ct.addressLabel":"Address","ct.phoneLabel":"Phone","ct.emailLabel":"Email","ct.scheduleLabel":"Schedule","ct.socialLabel":"Find us on",
+      "form.nameLabel":"Name","form.namePlaceholder":"Your name","form.emailLabel":"Email","form.emailPlaceholder":"email@example.com",
+      "form.messageLabel":"Message","form.messagePlaceholder":"How can we help?","form.submit":"Send message",
+      "form.sent":"Thank you! We'll get back to you soon.",
+      "footer.rights":"All rights reserved."
+    }
+  };
+
+  var MONTHS_SHORT = { ro:['Ian','Feb','Mar','Apr','Mai','Iun','Iul','Aug','Sep','Oct','Noi','Dec'], en:['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'] };
+  var MONTHS_LONG  = { ro:['ianuarie','februarie','martie','aprilie','mai','iunie','iulie','august','septembrie','octombrie','noiembrie','decembrie'],
+                        en:['January','February','March','April','May','June','July','August','September','October','November','December'] };
+
+  var currentLang = localStorage.getItem('church-lang') || 'ro';
+  var eventsData = null, sermonsData = null;
+
+  function applyLang(){
+    document.documentElement.lang = currentLang;
+    document.querySelectorAll('[data-lang-btn]').forEach(function(btn){
+      btn.classList.toggle('active', btn.getAttribute('data-lang-btn') === currentLang);
+    });
+    document.querySelectorAll('[data-i18n]').forEach(function(el){
+      var key = el.getAttribute('data-i18n');
+      var text = I18N[currentLang][key];
+      if (text !== undefined) el.textContent = text;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+      var key = el.getAttribute('data-i18n-placeholder');
+      var text = I18N[currentLang][key];
+      if (text !== undefined) el.setAttribute('placeholder', text);
+    });
+    renderEvents();
+    renderSermons();
+  }
+
+  function setLang(lang){
+    currentLang = lang;
+    localStorage.setItem('church-lang', lang);
+    applyLang();
+  }
+
+  document.querySelectorAll('[data-lang-btn]').forEach(function(btn){
+    btn.addEventListener('click', function(){ setLang(btn.getAttribute('data-lang-btn')); });
+  });
+
+  function parseDate(str){
+    var parts = str.split('-');
+    return new Date(parseInt(parts[0],10), parseInt(parts[1],10)-1, parseInt(parts[2],10));
+  }
+
+  function renderEvents(){
+    var container = document.getElementById('events-list');
+    if (!container) return;
+    if (!eventsData){ container.innerHTML = '<p class="empty-note">' + I18N[currentLang]['ev.loading'] + '</p>'; return; }
+    if (!eventsData.length){ container.innerHTML = '<p class="empty-note">' + I18N[currentLang]['ev.empty'] + '</p>'; return; }
+    container.innerHTML = eventsData.map(function(ev){
+      var d = parseDate(ev.date);
+      var num = String(d.getDate()).padStart(2,'0');
+      var mon = MONTHS_SHORT[currentLang][d.getMonth()];
+      var title = currentLang === 'en' ? (ev.title_en || ev.title_ro) : (ev.title_ro || ev.title_en);
+      var desc = currentLang === 'en' ? (ev.description_en || ev.description_ro) : (ev.description_ro || ev.description_en);
+      return '<div class="event"><div class="date"><span class="num">'+num+'</span><span class="mon">'+mon+'</span></div>' +
+             '<div><h4>'+escapeHtml(title)+'</h4><p>'+escapeHtml(desc)+'</p></div></div>';
+    }).join('');
+  }
+
+  function renderSermons(){
+    var container = document.getElementById('sermon-grid');
+    if (!container) return;
+    if (!sermonsData){ container.innerHTML = '<p class="empty-note">' + I18N[currentLang]['pr.loading'] + '</p>'; return; }
+    if (!sermonsData.length){ container.innerHTML = '<p class="empty-note">' + I18N[currentLang]['pr.empty'] + '</p>'; return; }
+    container.innerHTML = sermonsData.map(function(s){
+      var d = parseDate(s.date);
+      var monthName = MONTHS_LONG[currentLang][d.getMonth()];
+      var dateLabel = currentLang === 'en' ? (monthName + ' ' + d.getDate() + ', ' + d.getFullYear())
+                                            : (d.getDate() + ' ' + monthName + ' ' + d.getFullYear());
+      var title = currentLang === 'en' ? (s.title_en || s.title_ro) : (s.title_ro || s.title_en);
+      var desc = currentLang === 'en' ? (s.description_en || s.description_ro) : (s.description_ro || s.description_en);
+      return '<div class="sermon-card"><div class="sermon-thumb"><div class="play"></div></div>' +
+             '<div class="sermon-body"><div class="date">'+dateLabel+'</div><h4>'+escapeHtml(title)+'</h4><p>'+escapeHtml(desc)+'</p></div></div>';
+    }).join('');
+  }
+
+  function escapeHtml(str){
+    var div = document.createElement('div');
+    div.textContent = str == null ? '' : str;
+    return div.innerHTML;
+  }
+
+  function applySettings(s){
+    if (!s) return;
+    var map = {
+      'contact-address': s.address, 'contact-phone': s.phone, 'contact-email': s.email,
+      'hero-time-am': s.sun_am, 'hero-time-pm': s.sun_pm,
+      'program-sun-am': s.sun_am, 'program-sun-pm': s.sun_pm, 'program-friday': s.friday
+    };
+    Object.keys(map).forEach(function(id){
+      var el = document.getElementById(id);
+      if (el && map[id]) el.textContent = map[id];
+    });
+    var schedule = document.getElementById('contact-schedule');
+    if (schedule && s.sun_am && s.sun_pm && s.friday){
+      schedule.innerHTML = 'Duminică ' + s.sun_am + ' &amp; ' + s.sun_pm + ' · Vineri ' + s.friday;
+    }
+    var footer = document.getElementById('footer-address-phone');
+    if (footer && s.address && s.phone){
+      footer.textContent = s.address + ' · ' + s.phone;
+    }
+  }
+
+  fetch('content/events.json').then(function(r){ return r.json(); }).then(function(data){
+    eventsData = (data.events || []).slice().sort(function(a,b){ return parseDate(a.date) - parseDate(b.date); });
+    renderEvents();
+  }).catch(function(){ eventsData = []; renderEvents(); });
+
+  fetch('content/sermons.json').then(function(r){ return r.json(); }).then(function(data){
+    sermonsData = (data.sermons || []).slice().sort(function(a,b){ return parseDate(b.date) - parseDate(a.date); });
+    renderSermons();
+  }).catch(function(){ sermonsData = []; renderSermons(); });
+
+  fetch('content/settings.json').then(function(r){ return r.json(); }).then(applySettings).catch(function(){});
+
+  applyLang();
+})();
+</script>
+
+</body>
+</html>

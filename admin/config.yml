@@ -1,0 +1,59 @@
+backend:
+  name: github
+  repo: YOUR_GITHUB_USERNAME/YOUR_REPO_NAME   # <-- change this
+  branch: main
+  base_url: https://YOUR-WORKER-SUBDOMAIN.workers.dev   # <-- change this after deploying the Worker
+  auth_endpoint: auth
+
+# Where uploaded images go, and how the site links to them
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "events"
+    label: "Evenimente / Events"
+    files:
+      - label: "Lista de evenimente"
+        name: "events"
+        file: "content/events.json"
+        fields:
+          - label: "Evenimente"
+            name: "events"
+            widget: "list"
+            fields:
+              - { label: "Dată", name: "date", widget: "date", format: "YYYY-MM-DD" }
+              - { label: "Titlu (Română)", name: "title_ro", widget: "string" }
+              - { label: "Title (English)", name: "title_en", widget: "string" }
+              - { label: "Descriere (Română)", name: "description_ro", widget: "text" }
+              - { label: "Description (English)", name: "description_en", widget: "text" }
+
+  - name: "sermons"
+    label: "Predici / Sermons"
+    files:
+      - label: "Lista de predici"
+        name: "sermons"
+        file: "content/sermons.json"
+        fields:
+          - label: "Predici"
+            name: "sermons"
+            widget: "list"
+            fields:
+              - { label: "Dată", name: "date", widget: "date", format: "YYYY-MM-DD" }
+              - { label: "Titlu (Română)", name: "title_ro", widget: "string" }
+              - { label: "Title (English)", name: "title_en", widget: "string" }
+              - { label: "Descriere (Română)", name: "description_ro", widget: "text" }
+              - { label: "Description (English)", name: "description_en", widget: "text" }
+
+  - name: "settings"
+    label: "Contact & Program / Settings"
+    files:
+      - label: "Detalii biserică"
+        name: "settings"
+        file: "content/settings.json"
+        fields:
+          - { label: "Adresă / Address", name: "address", widget: "string" }
+          - { label: "Telefon / Phone", name: "phone", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Program duminică dimineața / Sunday AM", name: "sun_am", widget: "string" }
+          - { label: "Program duminică seara / Sunday PM", name: "sun_pm", widget: "string" }
+          - { label: "Program vineri / Friday", name: "friday", widget: "string" }
