@@ -1,8 +1,9 @@
 :root{
-  --navy: #14213D;
-  --navy-deep: #0B1526;
-  --burgundy: #6B1E2B;
-  --burgundy-deep: #4A131C;
+  /* burgundy is now the dominant color, navy is the accent (swapped on request) */
+  --navy: #6B1E2B;
+  --navy-deep: #4A131C;
+  --burgundy: #14213D;
+  --burgundy-deep: #0B1526;
   --gold: #B08D57;
   --gold-light: #D4BC8B;
   --cream: #F7F3EC;

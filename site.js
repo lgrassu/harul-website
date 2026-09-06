@@ -2,6 +2,7 @@
   var I18N = {
     ro: {
       "nav.acasa":"Acasă","nav.despre":"Despre noi","nav.program":"Program","nav.evenimente":"Evenimente","nav.predici":"Predici","nav.board":"Conducere","nav.daruire":"Dăruire","nav.contact":"Contact",
+      "brand.short":"Biserica Baptistă Harul","brand.full":"Biserica Baptistă Harul din Sacramento",
 
       "hero.eyebrow":"Vă așteptăm cu drag","hero.h1":"Bine ați venit acasă.",
       "hero.lead":"Suntem o comunitate creștină baptistă română din Sacramento, unită prin credință, rugăciune și părtășie, după îndemnul din Coloseni 3:12 de a ne îmbrăca într-o inimă plină de îndurare și bunătate.",
@@ -45,6 +46,7 @@
     },
     en: {
       "nav.acasa":"Home","nav.despre":"About","nav.program":"Service Times","nav.evenimente":"Events","nav.predici":"Sermons","nav.board":"Leadership","nav.daruire":"Give","nav.contact":"Contact",
+      "brand.short":"Grace Romanian Baptist Church","brand.full":"Grace Romanian Baptist Church of Sacramento",
 
       "hero.eyebrow":"We'd love to welcome you","hero.h1":"Welcome home.",
       "hero.lead":"We are a Romanian-speaking Baptist church family in Sacramento, united by faith, prayer, and fellowship, following the call of Colossians 3:12 to clothe ourselves with compassion and kindness.",
