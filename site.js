@@ -229,6 +229,26 @@
     }
   }
 
+  var SITE_TEXT_MAP = [
+    ['hero_eyebrow','hero.eyebrow'], ['hero_headline','hero.h1'], ['hero_lead','hero.lead'],
+    ['about_p1','despre.p1'], ['about_p2','despre.p2'],
+    ['value1_title','value1.title'], ['value1_body','value1.body'],
+    ['value2_title','value2.title'], ['value2_body','value2.body'],
+    ['value3_title','value3.title'], ['value3_body','value3.body'],
+    ['service1_body','card1.body'], ['service2_body','card2.body'], ['service3_body','card3.body'],
+    ['give_heading','dr.h2'], ['give_text','dr.p']
+  ];
+
+  function mergeSiteText(data){
+    if (!data) return;
+    SITE_TEXT_MAP.forEach(function(pair){
+      var jsonKey = pair[0], i18nKey = pair[1];
+      if (data[jsonKey + '_ro']) I18N.ro[i18nKey] = data[jsonKey + '_ro'];
+      if (data[jsonKey + '_en']) I18N.en[i18nKey] = data[jsonKey + '_en'];
+    });
+    applyLang();
+  }
+
   function loadAll(){
     fetch('content/events.json').then(function(r){ return r.json(); }).then(function(data){
       eventsData = (data.events || []).slice().sort(function(a,b){ return parseDate(a.date) - parseDate(b.date); });
@@ -246,6 +266,8 @@
     }).catch(function(){ boardData = []; renderBoard(); });
 
     fetch('content/settings.json').then(function(r){ return r.json(); }).then(applySettings).catch(function(){});
+
+    fetch('content/site-text.json').then(function(r){ return r.json(); }).then(mergeSiteText).catch(function(){});
   }
 
   document.addEventListener('DOMContentLoaded', function(){

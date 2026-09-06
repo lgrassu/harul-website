@@ -9,6 +9,46 @@ media_folder: "images"
 public_folder: "/images"
 
 collections:
+  - name: "site-text"
+    label: "Texte pagina principală / Homepage text"
+    files:
+      - label: "Texte principale"
+        name: "site-text"
+        file: "content/site-text.json"
+        fields:
+          - { label: "Mesaj scurt de bun venit (Română)", name: "hero_eyebrow_ro", widget: "string" }
+          - { label: "Short welcome tagline (English)", name: "hero_eyebrow_en", widget: "string" }
+          - { label: "Titlu principal (Română)", name: "hero_headline_ro", widget: "string" }
+          - { label: "Main headline (English)", name: "hero_headline_en", widget: "string" }
+          - { label: "Text de bun venit (Română)", name: "hero_lead_ro", widget: "text" }
+          - { label: "Welcome text (English)", name: "hero_lead_en", widget: "text" }
+          - { label: "Despre biserică - paragraf 1 (Română)", name: "about_p1_ro", widget: "text" }
+          - { label: "About - paragraph 1 (English)", name: "about_p1_en", widget: "text" }
+          - { label: "Despre biserică - paragraf 2 (Română)", name: "about_p2_ro", widget: "text" }
+          - { label: "About - paragraph 2 (English)", name: "about_p2_en", widget: "text" }
+          - { label: "Valoare 1 - titlu (Română)", name: "value1_title_ro", widget: "string" }
+          - { label: "Value 1 - title (English)", name: "value1_title_en", widget: "string" }
+          - { label: "Valoare 1 - text (Română)", name: "value1_body_ro", widget: "string" }
+          - { label: "Value 1 - text (English)", name: "value1_body_en", widget: "string" }
+          - { label: "Valoare 2 - titlu (Română)", name: "value2_title_ro", widget: "string" }
+          - { label: "Value 2 - title (English)", name: "value2_title_en", widget: "string" }
+          - { label: "Valoare 2 - text (Română)", name: "value2_body_ro", widget: "string" }
+          - { label: "Value 2 - text (English)", name: "value2_body_en", widget: "string" }
+          - { label: "Valoare 3 - titlu (Română)", name: "value3_title_ro", widget: "string" }
+          - { label: "Value 3 - title (English)", name: "value3_title_en", widget: "string" }
+          - { label: "Valoare 3 - text (Română)", name: "value3_body_ro", widget: "string" }
+          - { label: "Value 3 - text (English)", name: "value3_body_en", widget: "string" }
+          - { label: "Descriere serviciu duminică dimineața (Română)", name: "service1_body_ro", widget: "text" }
+          - { label: "Sunday morning service description (English)", name: "service1_body_en", widget: "text" }
+          - { label: "Descriere serviciu duminică seara (Română)", name: "service2_body_ro", widget: "text" }
+          - { label: "Sunday evening service description (English)", name: "service2_body_en", widget: "text" }
+          - { label: "Descriere serviciu vineri (Română)", name: "service3_body_ro", widget: "text" }
+          - { label: "Friday service description (English)", name: "service3_body_en", widget: "text" }
+          - { label: "Titlu secțiune Dăruire (Română)", name: "give_heading_ro", widget: "string" }
+          - { label: "Give section heading (English)", name: "give_heading_en", widget: "string" }
+          - { label: "Text secțiune Dăruire (Română)", name: "give_text_ro", widget: "text" }
+          - { label: "Give section text (English)", name: "give_text_en", widget: "text" }
+
   - name: "board"
     label: "Conducere / Leadership"
     files:
