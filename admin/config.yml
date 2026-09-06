@@ -1,15 +1,30 @@
 backend:
   name: github
-  repo: lgrassu/harul-website   # <-- change this
+  repo: lgrassu/harul-website
   branch: main
-  base_url: https://harul-cms-login.lgrassu.workers.dev   # <-- change this after deploying the Worker
+  base_url: https://harul-cms-login.lgrassu.workers.dev
   auth_endpoint: auth
 
-# Where uploaded images go, and how the site links to them
 media_folder: "images"
 public_folder: "/images"
 
 collections:
+  - name: "board"
+    label: "Conducere / Leadership"
+    files:
+      - label: "Membri conducere"
+        name: "board"
+        file: "content/board.json"
+        fields:
+          - label: "Membri"
+            name: "members"
+            widget: "list"
+            fields:
+              - { label: "Fotografie", name: "photo", widget: "image", required: false }
+              - { label: "Nume", name: "name", widget: "string" }
+              - { label: "Rol (Română)", name: "title_ro", widget: "string" }
+              - { label: "Role (English)", name: "title_en", widget: "string" }
+
   - name: "events"
     label: "Evenimente / Events"
     files:
