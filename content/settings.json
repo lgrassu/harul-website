@@ -4,5 +4,7 @@
   "email": "[completați emailul bisericii]",
   "sun_am": "9:30 – 12:00",
   "sun_pm": "5:00 – 6:30 PM",
-  "friday": "7:00 – 8:00 PM"
+  "friday": "7:00 – 8:00 PM",
+  "google_calendar_id": "",
+  "google_api_key": ""
 }

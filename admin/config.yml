@@ -112,3 +112,5 @@ collections:
           - { label: "Program duminică dimineața / Sunday AM", name: "sun_am", widget: "string" }
           - { label: "Program duminică seara / Sunday PM", name: "sun_pm", widget: "string" }
           - { label: "Program vineri / Friday", name: "friday", widget: "string" }
+          - { label: "Google Calendar ID", name: "google_calendar_id", widget: "string", required: false, hint: "Din setările calendarului Google, secțiunea 'Integrate calendar'." }
+          - { label: "Google Calendar API Key", name: "google_api_key", widget: "string", required: false, hint: "Din Google Cloud Console → Credentials." }
