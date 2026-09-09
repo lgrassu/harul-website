@@ -185,8 +185,15 @@
                                             : (d.getDate() + ' ' + monthName + ' ' + d.getFullYear());
       var title = currentLang === 'en' ? (s.title_en || s.title_ro) : (s.title_ro || s.title_en);
       var desc = currentLang === 'en' ? (s.description_en || s.description_ro) : (s.description_ro || s.description_en);
-      return '<div class="sermon-card"><div class="sermon-thumb"><div class="play"></div></div>' +
-             '<div class="sermon-body"><div class="date">'+dateLabel+'</div><h4>'+escapeHtml(title)+'</h4><p>'+escapeHtml(desc)+'</p></div></div>';
+      var thumbInner = s.thumbnail
+        ? '<img src="'+escapeHtml(s.thumbnail)+'" alt="" style="width:100%;height:100%;object-fit:cover;">'
+        : '<div class="play"></div>';
+      var cardOpen = s.videoId
+        ? '<a class="sermon-card" href="https://www.youtube.com/watch?v='+encodeURIComponent(s.videoId)+'" target="_blank" rel="noopener" style="display:block; text-decoration:none; color:inherit;">'
+        : '<div class="sermon-card">';
+      var cardClose = s.videoId ? '</a>' : '</div>';
+      return cardOpen + '<div class="sermon-thumb">'+thumbInner+'</div>' +
+             '<div class="sermon-body"><div class="date">'+dateLabel+'</div><h4>'+escapeHtml(title)+'</h4><p>'+escapeHtml(desc)+'</p></div>' + cardClose;
     }).join('');
   }
 
@@ -291,6 +298,19 @@
     });
   }
 
+  function getCached(key, maxAgeMs){
+    try {
+      var raw = localStorage.getItem(key);
+      if (!raw) return undefined;
+      var obj = JSON.parse(raw);
+      if (Date.now() - obj.ts > maxAgeMs) return undefined;
+      return obj.data;
+    } catch(e){ return undefined; }
+  }
+  function setCached(key, data){
+    try { localStorage.setItem(key, JSON.stringify({ ts: Date.now(), data: data })); } catch(e){}
+  }
+
   function renderLiveBanner(){
     var existing = document.getElementById('live-banner');
     if (!liveVideoId){
@@ -312,6 +332,13 @@
 
   function checkYouTubeLive(channelId, apiKey){
     if (!channelId || !apiKey) return;
+    var cacheKey = 'yt-live-' + channelId;
+    var cached = getCached(cacheKey, 2 * 60 * 1000); // refresh at most every 2 minutes
+    if (cached !== undefined){
+      liveVideoId = cached;
+      renderLiveBanner();
+      return;
+    }
     var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=' +
               encodeURIComponent(channelId) + '&eventType=live&type=video&key=' + encodeURIComponent(apiKey);
     fetch(url).then(function(r){
@@ -320,8 +347,56 @@
     }).then(function(data){
       var items = data.items || [];
       liveVideoId = (items.length && items[0].id && items[0].id.videoId) ? items[0].id.videoId : null;
+      setCached(cacheKey, liveVideoId);
       renderLiveBanner();
     }).catch(function(){ liveVideoId = null; renderLiveBanner(); });
+  }
+
+  function firstLine(text, maxLen){
+    if (!text) return '';
+    var line = text.split('\n')[0].trim();
+    if (line.length > maxLen) line = line.slice(0, maxLen).trim() + '…';
+    return line;
+  }
+
+  function loadSermonsFromJson(){
+    fetch('content/sermons.json').then(function(r){ return r.json(); }).then(function(data){
+      sermonsData = (data.sermons || []).slice().sort(function(a,b){ return parseDate(b.date) - parseDate(a.date); });
+      renderSermons();
+    }).catch(function(){ sermonsData = []; renderSermons(); });
+  }
+
+  function loadSermonsFromYouTube(channelId, apiKey){
+    var cacheKey = 'yt-sermons-' + channelId;
+    var cached = getCached(cacheKey, 6 * 60 * 60 * 1000); // refresh at most every 6 hours
+    if (cached !== undefined){
+      sermonsData = cached;
+      renderSermons();
+      return;
+    }
+    var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=' +
+              encodeURIComponent(channelId) + '&eventType=completed&type=video&order=date&maxResults=3&key=' + encodeURIComponent(apiKey);
+    fetch(url).then(function(r){
+      if (!r.ok) throw new Error('youtube sermons fetch failed');
+      return r.json();
+    }).then(function(data){
+      var items = data.items || [];
+      sermonsData = items.map(function(it){
+        var title = it.snippet ? it.snippet.title : '';
+        var desc = firstLine(it.snippet ? it.snippet.description : '', 160);
+        var published = it.snippet ? it.snippet.publishedAt : null;
+        var thumb = it.snippet && it.snippet.thumbnails && (it.snippet.thumbnails.medium || it.snippet.thumbnails.default);
+        return {
+          date: published ? published.slice(0,10) : null,
+          title_ro: title, title_en: title,
+          description_ro: desc, description_en: desc,
+          videoId: it.id ? it.id.videoId : null,
+          thumbnail: thumb ? thumb.url : null
+        };
+      }).filter(function(s){ return !!s.date; });
+      setCached(cacheKey, sermonsData);
+      renderSermons();
+    }).catch(function(){ loadSermonsFromJson(); });
   }
 
   function loadAll(){
@@ -334,13 +409,11 @@
       }
       if (s && s.youtube_channel_id && s.google_api_key){
         checkYouTubeLive(s.youtube_channel_id, s.google_api_key);
+        loadSermonsFromYouTube(s.youtube_channel_id, s.google_api_key);
+      } else {
+        loadSermonsFromJson();
       }
-    }).catch(function(){ loadEventsFromJson(); });
-
-    fetch('content/sermons.json').then(function(r){ return r.json(); }).then(function(data){
-      sermonsData = (data.sermons || []).slice().sort(function(a,b){ return parseDate(b.date) - parseDate(a.date); });
-      renderSermons();
-    }).catch(function(){ sermonsData = []; renderSermons(); });
+    }).catch(function(){ loadEventsFromJson(); loadSermonsFromJson(); });
 
     fetch('content/board.json').then(function(r){ return r.json(); }).then(function(data){
       boardData = data.members || [];
