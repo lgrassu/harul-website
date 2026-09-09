@@ -1,8 +1,0 @@
-{
-  "members": [
-    { "name": "Pastor Ioan Popescu", "title_ro": "Pastor", "title_en": "Pastor", "photo": "" },
-    { "name": "Vasile Ionescu", "title_ro": "Diacon", "title_en": "Deacon", "photo": "" },
-    { "name": "Mihai Georgescu", "title_ro": "Trezorier", "title_en": "Treasurer", "photo": "" },
-    { "name": "Elena Marin", "title_ro": "Secretar", "title_en": "Secretary", "photo": "" }
-  ]
-}
