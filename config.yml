@@ -1,0 +1,116 @@
+backend:
+  name: github
+  repo: lgrassu/harul-website
+  branch: main
+  base_url: https://harul-cms-login.lgrassu.workers.dev
+  auth_endpoint: auth
+
+media_folder: "images"
+public_folder: "/images"
+
+collections:
+  - name: "site-text"
+    label: "Texte pagina principală / Homepage text"
+    files:
+      - label: "Texte principale"
+        name: "site-text"
+        file: "content/site-text.json"
+        fields:
+          - { label: "Mesaj scurt de bun venit (Română)", name: "hero_eyebrow_ro", widget: "string" }
+          - { label: "Short welcome tagline (English)", name: "hero_eyebrow_en", widget: "string" }
+          - { label: "Titlu principal (Română)", name: "hero_headline_ro", widget: "string" }
+          - { label: "Main headline (English)", name: "hero_headline_en", widget: "string" }
+          - { label: "Text de bun venit (Română)", name: "hero_lead_ro", widget: "text" }
+          - { label: "Welcome text (English)", name: "hero_lead_en", widget: "text" }
+          - { label: "Despre biserică - paragraf 1 (Română)", name: "about_p1_ro", widget: "text" }
+          - { label: "About - paragraph 1 (English)", name: "about_p1_en", widget: "text" }
+          - { label: "Despre biserică - paragraf 2 (Română)", name: "about_p2_ro", widget: "text" }
+          - { label: "About - paragraph 2 (English)", name: "about_p2_en", widget: "text" }
+          - { label: "Valoare 1 - titlu (Română)", name: "value1_title_ro", widget: "string" }
+          - { label: "Value 1 - title (English)", name: "value1_title_en", widget: "string" }
+          - { label: "Valoare 1 - text (Română)", name: "value1_body_ro", widget: "string" }
+          - { label: "Value 1 - text (English)", name: "value1_body_en", widget: "string" }
+          - { label: "Valoare 2 - titlu (Română)", name: "value2_title_ro", widget: "string" }
+          - { label: "Value 2 - title (English)", name: "value2_title_en", widget: "string" }
+          - { label: "Valoare 2 - text (Română)", name: "value2_body_ro", widget: "string" }
+          - { label: "Value 2 - text (English)", name: "value2_body_en", widget: "string" }
+          - { label: "Valoare 3 - titlu (Română)", name: "value3_title_ro", widget: "string" }
+          - { label: "Value 3 - title (English)", name: "value3_title_en", widget: "string" }
+          - { label: "Valoare 3 - text (Română)", name: "value3_body_ro", widget: "string" }
+          - { label: "Value 3 - text (English)", name: "value3_body_en", widget: "string" }
+          - { label: "Descriere serviciu duminică dimineața (Română)", name: "service1_body_ro", widget: "text" }
+          - { label: "Sunday morning service description (English)", name: "service1_body_en", widget: "text" }
+          - { label: "Descriere serviciu duminică seara (Română)", name: "service2_body_ro", widget: "text" }
+          - { label: "Sunday evening service description (English)", name: "service2_body_en", widget: "text" }
+          - { label: "Descriere serviciu vineri (Română)", name: "service3_body_ro", widget: "text" }
+          - { label: "Friday service description (English)", name: "service3_body_en", widget: "text" }
+          - { label: "Titlu secțiune Dăruire (Română)", name: "give_heading_ro", widget: "string" }
+          - { label: "Give section heading (English)", name: "give_heading_en", widget: "string" }
+          - { label: "Text secțiune Dăruire (Română)", name: "give_text_ro", widget: "text" }
+          - { label: "Give section text (English)", name: "give_text_en", widget: "text" }
+
+  - name: "board"
+    label: "Conducere / Leadership"
+    files:
+      - label: "Membri conducere"
+        name: "board"
+        file: "content/board.json"
+        fields:
+          - label: "Membri"
+            name: "members"
+            widget: "list"
+            fields:
+              - { label: "Fotografie", name: "photo", widget: "image", required: false }
+              - { label: "Nume", name: "name", widget: "string" }
+              - { label: "Rol (Română)", name: "title_ro", widget: "string" }
+              - { label: "Role (English)", name: "title_en", widget: "string" }
+
+  - name: "events"
+    label: "Evenimente / Events"
+    files:
+      - label: "Lista de evenimente"
+        name: "events"
+        file: "content/events.json"
+        fields:
+          - label: "Evenimente"
+            name: "events"
+            widget: "list"
+            fields:
+              - { label: "Dată", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+              - { label: "Titlu (Română)", name: "title_ro", widget: "string" }
+              - { label: "Title (English)", name: "title_en", widget: "string" }
+              - { label: "Descriere (Română)", name: "description_ro", widget: "text" }
+              - { label: "Description (English)", name: "description_en", widget: "text" }
+
+  - name: "sermons"
+    label: "Predici / Sermons"
+    files:
+      - label: "Lista de predici"
+        name: "sermons"
+        file: "content/sermons.json"
+        fields:
+          - label: "Predici"
+            name: "sermons"
+            widget: "list"
+            fields:
+              - { label: "Dată", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "YYYY-MM-DD", time_format: false, picker_utc: true }
+              - { label: "Titlu (Română)", name: "title_ro", widget: "string" }
+              - { label: "Title (English)", name: "title_en", widget: "string" }
+              - { label: "Descriere (Română)", name: "description_ro", widget: "text" }
+              - { label: "Description (English)", name: "description_en", widget: "text" }
+
+  - name: "settings"
+    label: "Contact & Program / Settings"
+    files:
+      - label: "Detalii biserică"
+        name: "settings"
+        file: "content/settings.json"
+        fields:
+          - { label: "Adresă / Address", name: "address", widget: "string" }
+          - { label: "Telefon / Phone", name: "phone", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Program duminică dimineața / Sunday AM", name: "sun_am", widget: "string" }
+          - { label: "Program duminică seara / Sunday PM", name: "sun_pm", widget: "string" }
+          - { label: "Program vineri / Friday", name: "friday", widget: "string" }
+          - { label: "Google Calendar ID", name: "google_calendar_id", widget: "string", required: false, hint: "Din setările calendarului Google, secțiunea 'Integrate calendar'." }
+          - { label: "Google Calendar API Key", name: "google_api_key", widget: "string", required: false, hint: "Din Google Cloud Console → Credentials." }

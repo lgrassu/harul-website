@@ -249,11 +249,49 @@
     applyLang();
   }
 
-  function loadAll(){
+  function loadEventsFromJson(){
     fetch('content/events.json').then(function(r){ return r.json(); }).then(function(data){
       eventsData = (data.events || []).slice().sort(function(a,b){ return parseDate(a.date) - parseDate(b.date); });
       renderEvents();
     }).catch(function(){ eventsData = []; renderEvents(); });
+  }
+
+  function loadEventsFromGoogleCalendar(calendarId, apiKey){
+    var timeMin = new Date().toISOString();
+    var url = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(calendarId) +
+              '/events?key=' + encodeURIComponent(apiKey) +
+              '&singleEvents=true&orderBy=startTime&maxResults=25&timeMin=' + encodeURIComponent(timeMin);
+    fetch(url).then(function(r){
+      if (!r.ok) throw new Error('calendar fetch failed');
+      return r.json();
+    }).then(function(data){
+      var items = data.items || [];
+      eventsData = items.map(function(ev){
+        var dateStr = null;
+        if (ev.start){
+          dateStr = ev.start.date || (ev.start.dateTime ? ev.start.dateTime.slice(0,10) : null);
+        }
+        var title = ev.summary || '';
+        var desc = ev.description || '';
+        return { date: dateStr, title_ro: title, title_en: title, description_ro: desc, description_en: desc };
+      }).filter(function(e){ return !!e.date; })
+        .sort(function(a,b){ return parseDate(a.date) - parseDate(b.date); });
+      renderEvents();
+    }).catch(function(){
+      // if the calendar call fails for any reason, fall back to the manual list
+      loadEventsFromJson();
+    });
+  }
+
+  function loadAll(){
+    fetch('content/settings.json').then(function(r){ return r.json(); }).then(function(s){
+      applySettings(s);
+      if (s && s.google_calendar_id && s.google_api_key){
+        loadEventsFromGoogleCalendar(s.google_calendar_id, s.google_api_key);
+      } else {
+        loadEventsFromJson();
+      }
+    }).catch(function(){ loadEventsFromJson(); });
 
     fetch('content/sermons.json').then(function(r){ return r.json(); }).then(function(data){
       sermonsData = (data.sermons || []).slice().sort(function(a,b){ return parseDate(b.date) - parseDate(a.date); });
@@ -264,8 +302,6 @@
       boardData = data.members || [];
       renderBoard();
     }).catch(function(){ boardData = []; renderBoard(); });
-
-    fetch('content/settings.json').then(function(r){ return r.json(); }).then(applySettings).catch(function(){});
 
     fetch('content/site-text.json').then(function(r){ return r.json(); }).then(mergeSiteText).catch(function(){});
   }
