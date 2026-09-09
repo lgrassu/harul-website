@@ -375,7 +375,7 @@
       return;
     }
     var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=' +
-              encodeURIComponent(channelId) + '&eventType=completed&type=video&order=date&maxResults=3&key=' + encodeURIComponent(apiKey);
+              encodeURIComponent(channelId) + '&type=video&order=date&maxResults=3&key=' + encodeURIComponent(apiKey);
     fetch(url).then(function(r){
       if (!r.ok) throw new Error('youtube sermons fetch failed');
       return r.json();
