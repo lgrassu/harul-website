@@ -96,6 +96,7 @@
 
   var currentLang = localStorage.getItem('church-lang') || 'ro';
   var eventsData = null, sermonsData = null, boardData = null;
+  var liveVideoId = null;
 
   function applyLang(){
     document.documentElement.lang = currentLang;
@@ -115,6 +116,7 @@
     renderEvents();
     renderSermons();
     renderBoard();
+    renderLiveBanner();
   }
 
   function setLang(lang){
@@ -283,6 +285,39 @@
     });
   }
 
+  function renderLiveBanner(){
+    var existing = document.getElementById('live-banner');
+    if (!liveVideoId){
+      if (existing) existing.remove();
+      return;
+    }
+    var label = currentLang === 'en' ? "We're live now — watch on YouTube" : 'Suntem live acum — urmărește pe YouTube';
+    if (!existing){
+      existing = document.createElement('a');
+      existing.id = 'live-banner';
+      existing.className = 'live-banner';
+      existing.target = '_blank';
+      existing.rel = 'noopener';
+      document.body.insertBefore(existing, document.body.firstChild);
+    }
+    existing.href = 'https://www.youtube.com/watch?v=' + liveVideoId;
+    existing.innerHTML = '<span class="live-dot"></span> ' + escapeHtml(label);
+  }
+
+  function checkYouTubeLive(channelId, apiKey){
+    if (!channelId || !apiKey) return;
+    var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=' +
+              encodeURIComponent(channelId) + '&eventType=live&type=video&key=' + encodeURIComponent(apiKey);
+    fetch(url).then(function(r){
+      if (!r.ok) throw new Error('youtube live check failed');
+      return r.json();
+    }).then(function(data){
+      var items = data.items || [];
+      liveVideoId = (items.length && items[0].id && items[0].id.videoId) ? items[0].id.videoId : null;
+      renderLiveBanner();
+    }).catch(function(){ liveVideoId = null; renderLiveBanner(); });
+  }
+
   function loadAll(){
     fetch('content/settings.json').then(function(r){ return r.json(); }).then(function(s){
       applySettings(s);
@@ -290,6 +325,9 @@
         loadEventsFromGoogleCalendar(s.google_calendar_id, s.google_api_key);
       } else {
         loadEventsFromJson();
+      }
+      if (s && s.youtube_channel_id && s.google_api_key){
+        checkYouTubeLive(s.youtube_channel_id, s.google_api_key);
       }
     }).catch(function(){ loadEventsFromJson(); });
 

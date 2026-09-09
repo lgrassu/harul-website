@@ -113,4 +113,5 @@ collections:
           - { label: "Program duminică seara / Sunday PM", name: "sun_pm", widget: "string" }
           - { label: "Program vineri / Friday", name: "friday", widget: "string" }
           - { label: "Google Calendar ID", name: "google_calendar_id", widget: "string", required: false, hint: "Din setările calendarului Google, secțiunea 'Integrate calendar'." }
-          - { label: "Google Calendar API Key", name: "google_api_key", widget: "string", required: false, hint: "Din Google Cloud Console → Credentials." }
+          - { label: "Google API Key (Calendar + YouTube)", name: "google_api_key", widget: "string", required: false, hint: "Din Google Cloud Console → Credentials. Activați atât Calendar API cât și YouTube Data API v3 pe această cheie." }
+          - { label: "ID canal YouTube", name: "youtube_channel_id", widget: "string", required: false, hint: "Găsit în adresa canalului: youtube.com/channel/ACEST-ID" }
