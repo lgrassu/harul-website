@@ -22,6 +22,7 @@
       "card3.day":"Vineri","card3.body":"Studiu biblic și rugăciune în grupuri mici, pentru toate vârstele.",
 
       "ev.eyebrow":"Ce urmează","ev.h2":"Evenimente","ev.h2page":"Toate evenimentele","ev.loading":"Se încarcă evenimentele…","ev.empty":"Nu sunt evenimente programate momentan.","ev.seeall":"Vezi toate evenimentele",
+      "live.eyebrow":"Transmisie live","live.h2":"Urmărește live",
       "ev.page.lead":"Tot ce se întâmplă în comunitatea noastră, la un loc.",
 
       "pr.eyebrow":"Ascultă din nou","pr.h2":"Predici recente","pr.h2page":"Arhiva de predici","pr.loading":"Se încarcă predicile…","pr.empty":"Nu sunt predici disponibile momentan.","pr.seeall":"Vezi toate predicile",
@@ -66,6 +67,7 @@
       "card3.day":"Friday","card3.body":"Bible study and prayer in small groups, for all ages.",
 
       "ev.eyebrow":"What's coming up","ev.h2":"Events","ev.h2page":"All Events","ev.loading":"Loading events…","ev.empty":"No events scheduled right now.","ev.seeall":"See all events",
+      "live.eyebrow":"Live stream","live.h2":"Watch Live",
       "ev.page.lead":"Everything happening in our community, in one place.",
 
       "pr.eyebrow":"Listen again","pr.h2":"Recent Sermons","pr.h2page":"Sermon Archive","pr.loading":"Loading sermons…","pr.empty":"No sermons available right now.","pr.seeall":"See all sermons",
@@ -228,6 +230,10 @@
     var footer = document.getElementById('footer-address-phone');
     if (footer && s.address && s.phone){
       footer.textContent = s.address + ' · ' + s.phone;
+    }
+    var liveEmbed = document.getElementById('live-embed');
+    if (liveEmbed && s.youtube_channel_id){
+      liveEmbed.src = 'https://www.youtube.com/embed/live_stream?channel=' + encodeURIComponent(s.youtube_channel_id);
     }
   }
 
