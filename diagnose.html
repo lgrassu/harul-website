@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Diagnostic</title>
+<style>
+  body{ font-family: monospace; background:#111; color:#0f0; padding:20px; white-space:pre-wrap; word-break:break-word; }
+  .err{ color:#f66; }
+  .ok{ color:#6f6; }
+  h2{ color:#fff; font-family:sans-serif; }
+</style>
+</head>
+<body>
+<h2>Church Site Diagnostic</h2>
+<div id="out">Running checks…</div>
+<script>
+var out = document.getElementById('out');
+function log(msg, cls){
+  var div = document.createElement('div');
+  if (cls) div.className = cls;
+  div.textContent = msg;
+  out.appendChild(div);
+}
+out.textContent = '';
+
+log('Step 1: fetching settings.json from your live site...');
+fetch('https://graceromanianbaptistchurch.org/content/settings.json')
+  .then(function(r){
+    log('settings.json HTTP status: ' + r.status, r.ok ? 'ok' : 'err');
+    return r.json();
+  })
+  .then(function(s){
+    log('settings.json content: ' + JSON.stringify(s, null, 2));
+    var channelId = s.youtube_channel_id;
+    var apiKey = s.google_api_key;
+    if (!channelId || !apiKey){
+      log('MISSING: youtube_channel_id or google_api_key is empty in settings.json. Stopping here.', 'err');
+      return;
+    }
+    log('\nStep 2: checking YouTube "live now" endpoint...');
+    var liveUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=' + encodeURIComponent(channelId) + '&eventType=live&type=video&key=' + encodeURIComponent(apiKey);
+    fetch(liveUrl).then(function(r){
+      log('Live-check HTTP status: ' + r.status, r.ok ? 'ok' : 'err');
+      return r.json();
+    }).then(function(d){
+      log('Live-check response: ' + JSON.stringify(d, null, 2));
+    }).catch(function(e){ log('Live-check FAILED: ' + e, 'err'); });
+
+    log('\nStep 3: checking YouTube "recent videos" endpoint...');
+    var sermonsUrl = 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=' + encodeURIComponent(channelId) + '&type=video&order=date&maxResults=3&key=' + encodeURIComponent(apiKey);
+    fetch(sermonsUrl).then(function(r){
+      log('Sermons-check HTTP status: ' + r.status, r.ok ? 'ok' : 'err');
+      return r.json();
+    }).then(function(d){
+      log('Sermons-check response: ' + JSON.stringify(d, null, 2));
+    }).catch(function(e){ log('Sermons-check FAILED: ' + e, 'err'); });
+  })
+  .catch(function(e){
+    log('FAILED to fetch settings.json: ' + e, 'err');
+  });
+</script>
+</body>
+</html>
