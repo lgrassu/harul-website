@@ -141,6 +141,19 @@
     });
   }
 
+  function initMobileNav(){
+    var toggle = document.getElementById('nav-toggle');
+    var nav = document.querySelector('nav.links');
+    if (!toggle || !nav) return;
+    toggle.addEventListener('click', function(){
+      nav.classList.toggle('open');
+    });
+    // close the menu after tapping any link inside it
+    nav.querySelectorAll('a').forEach(function(a){
+      a.addEventListener('click', function(){ nav.classList.remove('open'); });
+    });
+  }
+
   function markCurrentNav(){
     var path = location.pathname.split('/').pop() || 'index.html';
     document.querySelectorAll('nav.links a[data-page]').forEach(function(a){
@@ -434,6 +447,7 @@
 
   document.addEventListener('DOMContentLoaded', function(){
     initLangToggle();
+    initMobileNav();
     markCurrentNav();
     loadAll();
     applyLang();
