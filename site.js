@@ -10,8 +10,10 @@
       "herocard.title":"Duminica aceasta","herocard.row1":"Serviciul de dimineață","herocard.row2":"Serviciul de seară","herocard.row3":"Video live pe YouTube",
 
       "despre.eyebrow":"Cine suntem","despre.h2":"Despre biserica noastră",
-      "despre.p1":"Biserica Baptistă Harul din Sacramento a luat naștere din dorința de a oferi comunității românești un loc de închinare, învățătură biblică și prietenie autentică.",
-      "despre.p2":"Credem în puterea Cuvântului lui Dumnezeu, în rugăciune și în părtășia frățească. Fiecare familie găsește aici un loc primitor.",
+      "despre.p1":"Biserica Baptistă Harul din Sacramento a fost înființată pe 25 decembrie 1990, din dorința de a oferi comunității românești un loc de închinare, învățătură biblică și prietenie autentică. Suntem membri ai Asociației Baptiste Române din SUA și Canada, precum și ai Northern Baptist Church Association.",
+      "despre.p2":"Credem în puterea Cuvântului lui Dumnezeu, în rugăciune și în părtășia frățească, urmând modelul din Fapte 2:42-47. Fiecare familie găsește aici un loc primitor.",
+      "history.eyebrow":"De unde am pornit","history.h2":"Istoricul nostru",
+      "history.text":"Biserica noastră a început ca un mic grup de creștini români conduși de păstorul Pitt Popovici, întâlnindu-se inițial într-o anexă a unei biserici Nazarene de pe Arden Way. De-a lungul anilor, prin harul lui Dumnezeu, comunitatea a crescut, mutându-se într-o clădire proprie în West Sacramento și continuând să slujească familii românești din zona Sacramento până astăzi.",
       "value1.title":"Credință biblică","value1.body":"Predicare centrată pe Scriptură, în fiecare duminică.",
       "value2.title":"Familie și comunitate","value2.body":"Grupuri de părtășie, tineret și școală duminicală pentru toate vârstele.",
       "value3.title":"Slujire cu bucurie","value3.body":"Implicare activă în comunitate, misiune și ajutorare.",
@@ -55,8 +57,10 @@
       "herocard.title":"This Sunday","herocard.row1":"Morning service","herocard.row2":"Evening service","herocard.row3":"Live on YouTube",
 
       "despre.eyebrow":"Who we are","despre.h2":"About our church",
-      "despre.p1":"Grace Romanian Baptist Church of Sacramento was founded out of a desire to give the Romanian community a place of worship, biblical teaching, and genuine friendship.",
-      "despre.p2":"We believe in the power of God's Word, in prayer, and in the fellowship of believers. Every family finds a welcoming place here.",
+      "despre.p1":"Grace Romanian Baptist Church of Sacramento was founded on December 25, 1990, out of a desire to give the Romanian community a place of worship, biblical teaching, and genuine friendship. We are members of the Romanian Baptist Association in USA and Canada, as well as the Northern Baptist Church Association.",
+      "despre.p2":"We believe in the power of God's Word, in prayer, and in the fellowship of believers, following the pattern set out in Acts 2:42-47. Every family finds a welcoming place here.",
+      "history.eyebrow":"Where we started","history.h2":"Our History",
+      "history.text":"Our church began as a small group of Romanian Christians led by Pastor Pitt Popovici, first meeting in an annex of a Nazarene church on Arden Way. Over the years, by God's grace, the community grew, moving into its own building in West Sacramento and continuing to serve Romanian families in the Sacramento area to this day.",
       "value1.title":"Biblical faith","value1.body":"Scripture-centered preaching every Sunday.",
       "value2.title":"Family & community","value2.body":"Fellowship groups, youth ministry, and Sunday school for all ages.",
       "value3.title":"Joyful service","value3.body":"Active involvement in community, missions, and outreach.",
@@ -251,7 +255,8 @@
     ['value2_title','value2.title'], ['value2_body','value2.body'],
     ['value3_title','value3.title'], ['value3_body','value3.body'],
     ['service1_body','card1.body'], ['service2_body','card2.body'], ['service3_body','card3.body'],
-    ['give_heading','dr.h2'], ['give_text','dr.p']
+    ['give_heading','dr.h2'], ['give_text','dr.p'],
+    ['history_eyebrow','history.eyebrow'], ['history_h2','history.h2'], ['history_text','history.text']
   ];
 
   function mergeSiteText(data){
