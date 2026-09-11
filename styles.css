@@ -125,7 +125,7 @@ nav.links a:hover, nav.links a:focus-visible, nav.links a.current{
 }
 .hero-watermark{
   position:absolute; top:50%; right:-60px; transform:translateY(-50%);
-  width:560px; height:560px; opacity:.07;
+  width:560px; height:560px; opacity:.16;
   filter:brightness(0) invert(1);
   pointer-events:none; z-index:0;
 }
