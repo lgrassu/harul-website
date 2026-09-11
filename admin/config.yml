@@ -48,6 +48,12 @@ collections:
           - { label: "Give section heading (English)", name: "give_heading_en", widget: "string" }
           - { label: "Text secțiune Dăruire (Română)", name: "give_text_ro", widget: "text" }
           - { label: "Give section text (English)", name: "give_text_en", widget: "text" }
+          - { label: "Titlu secțiune Istoric (Română)", name: "history_eyebrow_ro", widget: "string" }
+          - { label: "History section eyebrow (English)", name: "history_eyebrow_en", widget: "string" }
+          - { label: "Titlu principal Istoric (Română)", name: "history_h2_ro", widget: "string" }
+          - { label: "History section heading (English)", name: "history_h2_en", widget: "string" }
+          - { label: "Text Istoric (Română)", name: "history_text_ro", widget: "text" }
+          - { label: "History text (English)", name: "history_text_en", widget: "text" }
 
   - name: "board"
     label: "Conducere / Leadership"
