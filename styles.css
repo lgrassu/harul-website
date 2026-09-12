@@ -325,6 +325,11 @@ a.sermon-card:hover{
 /* contact */
 .contact-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:48px;}
 .contact-info .row{display:flex; gap:16px; margin-bottom:22px;}
+.map-embed{
+  border-radius:var(--radius); overflow:hidden; border:1px solid var(--line);
+  margin-bottom:22px;
+}
+.map-embed iframe{ display:block; }
 .contact-info .icon{
   width:40px; height:40px; border-radius:var(--radius); background:var(--navy);
   display:flex; align-items:center; justify-content:center; flex:none;

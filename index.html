@@ -137,20 +137,24 @@
     <div class="contact-grid">
       <div class="contact-info">
         <div class="row"><div class="icon">A</div><div><h4 data-i18n="ct.addressLabel">Adresă</h4><p id="contact-address">3832 Whitney Ave., Sacramento, CA 95821</p></div></div>
-        <div class="row"><div class="icon">T</div><div><h4 data-i18n="ct.phoneLabel">Telefon</h4><p id="contact-phone">(916) 483-7744</p></div></div>
-        <div class="row"><div class="icon">E</div><div><h4 data-i18n="ct.emailLabel">Email</h4><p id="contact-email">[completați emailul bisericii]</p></div></div>
-        <div class="row"><div class="icon">D</div><div><h4 data-i18n="ct.scheduleLabel">Program</h4><p id="contact-schedule">Duminică 9:30–12:00 &amp; 5:00–6:30 PM · Vineri 7:00–8:00 PM</p></div></div>
+        <div class="map-embed">
+          <iframe src="https://www.google.com/maps?q=3832+Whitney+Ave,+Sacramento,+CA+95821&output=embed" width="100%" height="220" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Locația bisericii pe hartă"></iframe>
+        </div>
         <div class="row"><div class="icon">S</div><div><h4 data-i18n="ct.socialLabel">Ne găsiți și pe</h4><p><a href="https://www.facebook.com/Grace-Romanian-Baptist-Church-282278018634444/" target="_blank" rel="noopener">Facebook</a> · <a href="https://www.youtube.com/channel/UCf5mfUpzylDw2VsaT_wyTCg" target="_blank" rel="noopener">YouTube</a> · <a href="https://vimeo.com/harulsac" target="_blank" rel="noopener">Vimeo</a></p></div></div>
       </div>
-      <form class="contact-form" onsubmit="event.preventDefault(); this.querySelector('.sent').style.display='block';">
+      <form class="contact-form" id="contact-form">
         <label for="nume" data-i18n="form.nameLabel">Nume</label>
-        <input id="nume" type="text" data-i18n-placeholder="form.namePlaceholder" placeholder="Numele dvs." required>
+        <input id="nume" name="name" type="text" data-i18n-placeholder="form.namePlaceholder" placeholder="Numele dvs." required>
         <label for="email" data-i18n="form.emailLabel">Email</label>
-        <input id="email" type="email" data-i18n-placeholder="form.emailPlaceholder" placeholder="email@exemplu.com" required>
+        <input id="email" name="email" type="email" data-i18n-placeholder="form.emailPlaceholder" placeholder="email@exemplu.com" required>
         <label for="mesaj" data-i18n="form.messageLabel">Mesaj</label>
-        <textarea id="mesaj" data-i18n-placeholder="form.messagePlaceholder" placeholder="Cum vă putem ajuta?" required></textarea>
+        <textarea id="mesaj" name="message" data-i18n-placeholder="form.messagePlaceholder" placeholder="Cum vă putem ajuta?" required></textarea>
+        <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_ACCESS_KEY">
+        <input type="hidden" name="subject" value="Mesaj nou de pe graceromanianbaptistchurch.org">
+        <input type="checkbox" name="botcheck" style="display:none;">
         <button type="submit" class="btn btn-primary" style="border:none; cursor:pointer;" data-i18n="form.submit">Trimite mesajul</button>
         <p class="sent" style="display:none; color:var(--burgundy); font-weight:700; margin:14px 0 0;" data-i18n="form.sent">Mulțumim! Vă vom răspunde în curând.</p>
+        <p class="form-error" style="display:none; color:#B3261E; font-weight:700; margin:14px 0 0;" data-i18n="form.error">A apărut o eroare. Încercați din nou sau sunați-ne direct.</p>
       </form>
     </div>
   </div>
@@ -166,7 +170,7 @@
       <a href="sermons.html" data-i18n="nav.predici">Predici</a>
       <a href="board.html" data-i18n="nav.board">Conducere</a>
     </div>
-    <p id="footer-address-phone">3832 Whitney Ave., Sacramento, CA 95821 · (916) 483-7744</p>
+    <p id="footer-address-phone">3832 Whitney Ave., Sacramento, CA 95821</p>
     <p>&copy; 2026 Grace Romanian Baptist Church of Sacramento. <span data-i18n="footer.rights">Toate drepturile rezervate.</span></p>
   </div>
 </footer>

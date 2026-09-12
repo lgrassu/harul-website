@@ -49,6 +49,7 @@
       "form.nameLabel":"Nume","form.namePlaceholder":"Numele dvs.","form.emailLabel":"Email","form.emailPlaceholder":"email@exemplu.com",
       "form.messageLabel":"Mesaj","form.messagePlaceholder":"Cum vă putem ajuta?","form.submit":"Trimite mesajul",
       "form.sent":"Mulțumim! Vă vom răspunde în curând.",
+      "form.error":"A apărut o eroare. Încercați din nou sau sunați-ne direct.",
       "footer.rights":"Toate drepturile rezervate."
     },
     en: {
@@ -100,6 +101,7 @@
       "form.nameLabel":"Name","form.namePlaceholder":"Your name","form.emailLabel":"Email","form.emailPlaceholder":"email@example.com",
       "form.messageLabel":"Message","form.messagePlaceholder":"How can we help?","form.submit":"Send message",
       "form.sent":"Thank you! We'll get back to you soon.",
+      "form.error":"Something went wrong. Please try again or call us directly.",
       "footer.rights":"All rights reserved."
     }
   };
@@ -156,6 +158,44 @@
     // close the menu after tapping any link inside it
     nav.querySelectorAll('a').forEach(function(a){
       a.addEventListener('click', function(){ nav.classList.remove('open'); });
+    });
+  }
+
+  function initContactForm(){
+    var form = document.getElementById('contact-form');
+    if (!form) return;
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var sent = form.querySelector('.sent');
+      var errorEl = form.querySelector('.form-error');
+      var btn = form.querySelector('button[type="submit"]');
+      if (sent) sent.style.display = 'none';
+      if (errorEl) errorEl.style.display = 'none';
+      if (btn) btn.disabled = true;
+
+      var formData = new FormData(form);
+      var payload = {};
+      formData.forEach(function(value, key){ payload[key] = value; });
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+      .then(function(r){ return r.json(); })
+      .then(function(data){
+        if (btn) btn.disabled = false;
+        if (data.success){
+          if (sent) sent.style.display = 'block';
+          form.reset();
+        } else {
+          if (errorEl) errorEl.style.display = 'block';
+        }
+      })
+      .catch(function(){
+        if (btn) btn.disabled = false;
+        if (errorEl) errorEl.style.display = 'block';
+      });
     });
   }
 
@@ -278,20 +318,15 @@
   function applySettings(s){
     if (!s) return;
     var map = {
-      'contact-address': s.address, 'contact-phone': s.phone, 'contact-email': s.email,
-      'program-sun-am': s.sun_am, 'program-sun-pm': s.sun_pm, 'program-friday': s.friday
+      'contact-address': s.address
     };
     Object.keys(map).forEach(function(id){
       var el = document.getElementById(id);
       if (el && map[id]) el.textContent = map[id];
     });
-    var schedule = document.getElementById('contact-schedule');
-    if (schedule && s.sun_am && s.sun_pm && s.friday){
-      schedule.innerHTML = 'Duminică ' + s.sun_am + ' &amp; ' + s.sun_pm + ' · Vineri ' + s.friday;
-    }
     var footer = document.getElementById('footer-address-phone');
-    if (footer && s.address && s.phone){
-      footer.textContent = s.address + ' · ' + s.phone;
+    if (footer && s.address){
+      footer.textContent = s.address;
     }
     var liveEmbeds = document.querySelectorAll('.live-embed');
     if (liveEmbeds.length && s.youtube_channel_id){
@@ -499,6 +534,7 @@
   document.addEventListener('DOMContentLoaded', function(){
     initLangToggle();
     initMobileNav();
+    initContactForm();
     markCurrentNav();
     loadAll();
     applyLang();
