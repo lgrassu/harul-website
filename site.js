@@ -181,6 +181,15 @@
     return hours + ':' + minStr + ' ' + ampm;
   }
 
+  function splitBilingual(text){
+    text = text || '';
+    if (text.indexOf('|') !== -1){
+      var parts = text.split('|');
+      return { ro: parts[0].trim(), en: (parts[1] || parts[0]).trim() };
+    }
+    return { ro: text, en: text };
+  }
+
   function escapeHtml(str){
     var div = document.createElement('div');
     div.textContent = str == null ? '' : str;
@@ -348,9 +357,9 @@
             dateStr = ev.start.date;
           }
         }
-        var title = ev.summary || '';
-        var desc = ev.description || '';
-        return { date: dateStr, time: timeStr, title_ro: title, title_en: title, description_ro: desc, description_en: desc };
+        var title = splitBilingual(ev.summary);
+        var desc = splitBilingual(ev.description);
+        return { date: dateStr, time: timeStr, title_ro: title.ro, title_en: title.en, description_ro: desc.ro, description_en: desc.en };
       }).filter(function(e){ return !!e.date; })
         .sort(function(a,b){ return parseDate(a.date) - parseDate(b.date); });
       renderCalendar();
