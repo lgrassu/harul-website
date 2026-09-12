@@ -171,6 +171,16 @@
     return new Date(parseInt(parts[0],10), parseInt(parts[1],10)-1, parseInt(parts[2],10));
   }
 
+  function formatTime12(dateObj){
+    var hours = dateObj.getHours();
+    var minutes = dateObj.getMinutes();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    if (hours === 0) hours = 12;
+    var minStr = String(minutes).padStart(2, '0');
+    return hours + ':' + minStr + ' ' + ampm;
+  }
+
   function escapeHtml(str){
     var div = document.createElement('div');
     div.textContent = str == null ? '' : str;
@@ -326,10 +336,10 @@
           if (ev.start.dateTime){
             dateStr = ev.start.dateTime.slice(0,10);
             var startDt = new Date(ev.start.dateTime);
-            var startStr = startDt.toLocaleTimeString(currentLang === 'en' ? 'en-US' : 'ro-RO', {hour:'numeric', minute:'2-digit'});
+            var startStr = formatTime12(startDt);
             if (ev.end && ev.end.dateTime){
               var endDt = new Date(ev.end.dateTime);
-              var endStr = endDt.toLocaleTimeString(currentLang === 'en' ? 'en-US' : 'ro-RO', {hour:'numeric', minute:'2-digit'});
+              var endStr = formatTime12(endDt);
               timeStr = startStr + ' – ' + endStr;
             } else {
               timeStr = startStr;
