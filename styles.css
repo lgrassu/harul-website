@@ -405,15 +405,15 @@ footer .foot-links a:hover{ color:var(--gold-light); }
 .hero-card h3{ margin-bottom:16px; }
 .hero-card .events-list{ display:grid; gap:10px; margin-bottom:4px; }
 .hero-card .event{
-  display:grid; grid-template-columns:52px 1fr; gap:12px; align-items:center;
+  display:grid; grid-template-columns:52px 1fr; gap:12px; align-items:start;
   background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15);
   border-radius:var(--radius); padding:10px 12px;
 }
 .hero-card .event .date{ background:var(--gold); border-radius:4px; padding:6px 0; }
 .hero-card .event .date .num{ font-size:1rem; color:var(--navy); }
 .hero-card .event .date .mon{ color:var(--navy); opacity:.75; }
-.hero-card .event h4{ font-size:.88rem; margin:0; color:#fff; }
-.hero-card .event p{ display:none; }
+.hero-card .event h4{ font-size:.88rem; margin:0 0 3px; color:#fff; }
+.hero-card .event p{ display:block; margin:0; font-size:.78rem; color:rgba(255,255,255,.65); line-height:1.4; }
 .hero-card .empty-note{ color:rgba(255,255,255,.6); }
 .hero-link{ color:var(--gold-light) !important; border-bottom-color:var(--gold-light) !important; }
 .glance-box-video .live-embed-wrap{ margin-top:2px; }
