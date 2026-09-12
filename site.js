@@ -192,8 +192,9 @@
         var mon = MONTHS_SHORT[currentLang][d.getMonth()];
         var title = currentLang === 'en' ? (ev.title_en || ev.title_ro) : (ev.title_ro || ev.title_en);
         var desc = currentLang === 'en' ? (ev.description_en || ev.description_ro) : (ev.description_ro || ev.description_en);
+        var timeHtml = ev.time ? ' <span class="event-time">· '+escapeHtml(ev.time)+'</span>' : '';
         return '<div class="event"><div class="date"><span class="num">'+num+'</span><span class="mon">'+mon+'</span></div>' +
-               '<div><h4>'+escapeHtml(title)+'</h4><p>'+escapeHtml(desc)+'</p></div></div>';
+               '<div><h4>'+escapeHtml(title)+timeHtml+'</h4><p>'+escapeHtml(desc)+'</p></div></div>';
       }).join('');
     });
   }
@@ -320,13 +321,19 @@
     }).then(function(data){
       var items = data.items || [];
       calendarData = items.map(function(ev){
-        var dateStr = null;
+        var dateStr = null, timeStr = '';
         if (ev.start){
-          dateStr = ev.start.date || (ev.start.dateTime ? ev.start.dateTime.slice(0,10) : null);
+          if (ev.start.dateTime){
+            dateStr = ev.start.dateTime.slice(0,10);
+            var dt = new Date(ev.start.dateTime);
+            timeStr = dt.toLocaleTimeString(currentLang === 'en' ? 'en-US' : 'ro-RO', {hour:'numeric', minute:'2-digit'});
+          } else {
+            dateStr = ev.start.date;
+          }
         }
         var title = ev.summary || '';
         var desc = ev.description || '';
-        return { date: dateStr, title_ro: title, title_en: title, description_ro: desc, description_en: desc };
+        return { date: dateStr, time: timeStr, title_ro: title, title_en: title, description_ro: desc, description_en: desc };
       }).filter(function(e){ return !!e.date; })
         .sort(function(a,b){ return parseDate(a.date) - parseDate(b.date); });
       renderCalendar();
