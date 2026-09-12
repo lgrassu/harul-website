@@ -14,7 +14,7 @@ collections:
     files:
       - label: "Texte principale"
         name: "site-text"
-        file: "content/site-text.json"
+        file: "site-text.json"
         fields:
           - { label: "Mesaj scurt de bun venit (Română)", name: "hero_eyebrow_ro", widget: "string" }
           - { label: "Short welcome tagline (English)", name: "hero_eyebrow_en", widget: "string" }
@@ -62,7 +62,7 @@ collections:
     files:
       - label: "Membri conducere"
         name: "board"
-        file: "content/board.json"
+        file: "board.json"
         fields:
           - label: "Membri"
             name: "members"
@@ -78,7 +78,7 @@ collections:
     files:
       - label: "Lista de evenimente"
         name: "events"
-        file: "content/events.json"
+        file: "events.json"
         fields:
           - label: "Evenimente"
             name: "events"
@@ -95,7 +95,7 @@ collections:
     files:
       - label: "Lista de predici"
         name: "sermons"
-        file: "content/sermons.json"
+        file: "sermons.json"
         fields:
           - label: "Predici"
             name: "sermons"
@@ -112,7 +112,7 @@ collections:
     files:
       - label: "Detalii biserică"
         name: "settings"
-        file: "content/settings.json"
+        file: "settings.json"
         fields:
           - { label: "Adresă / Address", name: "address", widget: "string" }
           - { label: "Telefon / Phone", name: "phone", widget: "string" }
