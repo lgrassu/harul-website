@@ -396,7 +396,7 @@ footer .foot-links a:hover{ color:var(--gold-light); }
 .glance-box .event .date{ padding:8px 0; }
 .glance-box .event .date .num{ font-size:1.1rem; }
 .glance-box .event h4{ font-size:.92rem; }
-.glance-box .event p{ display:none; }
+.glance-box .event p{ display:block; margin:4px 0 0; font-size:.82rem; color:var(--ink-soft); line-height:1.4; }
 .glance-link{
   display:inline-block; margin-top:14px; font-size:.82rem; font-weight:700;
   color:var(--burgundy); text-decoration:none; border-bottom:1px solid var(--burgundy);

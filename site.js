@@ -325,8 +325,15 @@
         if (ev.start){
           if (ev.start.dateTime){
             dateStr = ev.start.dateTime.slice(0,10);
-            var dt = new Date(ev.start.dateTime);
-            timeStr = dt.toLocaleTimeString(currentLang === 'en' ? 'en-US' : 'ro-RO', {hour:'numeric', minute:'2-digit'});
+            var startDt = new Date(ev.start.dateTime);
+            var startStr = startDt.toLocaleTimeString(currentLang === 'en' ? 'en-US' : 'ro-RO', {hour:'numeric', minute:'2-digit'});
+            if (ev.end && ev.end.dateTime){
+              var endDt = new Date(ev.end.dateTime);
+              var endStr = endDt.toLocaleTimeString(currentLang === 'en' ? 'en-US' : 'ro-RO', {hour:'numeric', minute:'2-digit'});
+              timeStr = startStr + ' – ' + endStr;
+            } else {
+              timeStr = startStr;
+            }
           } else {
             dateStr = ev.start.date;
           }
