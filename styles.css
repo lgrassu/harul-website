@@ -375,6 +375,7 @@ footer .foot-links a:hover{ color:var(--gold-light); }
 .glance-grid{
   display:grid; grid-template-columns:repeat(3,1fr); gap:24px; align-items:start;
 }
+.glance-grid-2{ grid-template-columns:1fr 1fr; }
 .glance-box{
   background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:24px;
   box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 1px 3px rgba(20,33,61,.05);
@@ -389,7 +390,7 @@ footer .foot-links a:hover{ color:var(--gold-light); }
 }
 .glance-box .time-row:last-child{ border-bottom:none; }
 .glance-box .time-row span:last-child{ font-weight:700; color:var(--navy); }
-.glance-box .events-list{ gap:10px; }
+.glance-box .events-list, .glance-box .calendar-list{ gap:10px; }
 .glance-box .event{ padding:12px 14px; gap:14px; grid-template-columns:60px 1fr; }
 .glance-box .event .date{ padding:8px 0; }
 .glance-box .event .date .num{ font-size:1.1rem; }
@@ -399,6 +400,22 @@ footer .foot-links a:hover{ color:var(--gold-light); }
   display:inline-block; margin-top:14px; font-size:.82rem; font-weight:700;
   color:var(--burgundy); text-decoration:none; border-bottom:1px solid var(--burgundy);
 }
+
+/* events list nested in the dark hero card */
+.hero-card h3{ margin-bottom:16px; }
+.hero-card .events-list{ display:grid; gap:10px; margin-bottom:4px; }
+.hero-card .event{
+  display:grid; grid-template-columns:52px 1fr; gap:12px; align-items:center;
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15);
+  border-radius:var(--radius); padding:10px 12px;
+}
+.hero-card .event .date{ background:var(--gold); border-radius:4px; padding:6px 0; }
+.hero-card .event .date .num{ font-size:1rem; color:var(--navy); }
+.hero-card .event .date .mon{ color:var(--navy); opacity:.75; }
+.hero-card .event h4{ font-size:.88rem; margin:0; color:#fff; }
+.hero-card .event p{ display:none; }
+.hero-card .empty-note{ color:rgba(255,255,255,.6); }
+.hero-link{ color:var(--gold-light) !important; border-bottom-color:var(--gold-light) !important; }
 .glance-box-video .live-embed-wrap{ margin-top:2px; }
 
 /* ---- persistent live embed (dark when offline, live video when streaming) ---- */

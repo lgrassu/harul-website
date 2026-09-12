@@ -28,6 +28,7 @@
       "ev.eyebrow":"Ce urmează","ev.h2":"Evenimente","ev.h2page":"Toate evenimentele","ev.loading":"Se încarcă evenimentele…","ev.empty":"Nu sunt evenimente programate momentan.","ev.seeall":"Vezi toate evenimentele",
       "live.eyebrow":"Transmisie live","live.h2":"Urmărește live",
       "glance.schedule":"Programul săptămânii",
+      "cal.h2":"Calendar","cal.loading":"Se încarcă…","cal.empty":"Nu sunt întâlniri programate momentan.",
       "ev.page.lead":"Tot ce se întâmplă în comunitatea noastră, la un loc.",
 
       "pr.eyebrow":"Ascultă din nou","pr.h2":"Predici recente","pr.h2page":"Arhiva de predici","pr.loading":"Se încarcă predicile…","pr.empty":"Nu sunt predici disponibile momentan.","pr.seeall":"Vezi toate predicile",
@@ -78,6 +79,7 @@
       "ev.eyebrow":"What's coming up","ev.h2":"Events","ev.h2page":"All Events","ev.loading":"Loading events…","ev.empty":"No events scheduled right now.","ev.seeall":"See all events",
       "live.eyebrow":"Live stream","live.h2":"Watch Live",
       "glance.schedule":"This Week's Schedule",
+      "cal.h2":"Calendar","cal.loading":"Loading…","cal.empty":"No meetings scheduled right now.",
       "ev.page.lead":"Everything happening in our community, in one place.",
 
       "pr.eyebrow":"Listen again","pr.h2":"Recent Sermons","pr.h2page":"Sermon Archive","pr.loading":"Loading sermons…","pr.empty":"No sermons available right now.","pr.seeall":"See all sermons",
@@ -107,7 +109,7 @@
                         en:['January','February','March','April','May','June','July','August','September','October','November','December'] };
 
   var currentLang = localStorage.getItem('church-lang') || 'ro';
-  var eventsData = null, sermonsData = null, boardData = null;
+  var eventsData = null, sermonsData = null, boardData = null, calendarData = null;
   var liveVideoId = null;
 
   function applyLang(){
@@ -126,6 +128,7 @@
       if (text !== undefined) el.setAttribute('placeholder', text);
     });
     renderEvents();
+    renderCalendar();
     renderSermons();
     renderBoard();
     renderLiveBanner();
@@ -174,15 +177,15 @@
     return div.innerHTML;
   }
 
-  function renderEvents(){
-    var containers = document.querySelectorAll('.events-list');
+  function renderDateList(selector, data, loadingKey, emptyKey){
+    var containers = document.querySelectorAll(selector);
     if (!containers.length) return;
     containers.forEach(function(container){
       var limit = container.getAttribute('data-limit');
-      if (!eventsData){ container.innerHTML = '<p class="empty-note">' + I18N[currentLang]['ev.loading'] + '</p>'; return; }
-      var list = eventsData;
+      if (!data){ container.innerHTML = '<p class="empty-note">' + I18N[currentLang][loadingKey] + '</p>'; return; }
+      var list = data;
       if (limit) list = list.slice(0, parseInt(limit,10));
-      if (!list.length){ container.innerHTML = '<p class="empty-note">' + I18N[currentLang]['ev.empty'] + '</p>'; return; }
+      if (!list.length){ container.innerHTML = '<p class="empty-note">' + I18N[currentLang][emptyKey] + '</p>'; return; }
       container.innerHTML = list.map(function(ev){
         var d = parseDate(ev.date);
         var num = String(d.getDate()).padStart(2,'0');
@@ -193,6 +196,14 @@
                '<div><h4>'+escapeHtml(title)+'</h4><p>'+escapeHtml(desc)+'</p></div></div>';
       }).join('');
     });
+  }
+
+  function renderEvents(){
+    renderDateList('.events-list', eventsData, 'ev.loading', 'ev.empty');
+  }
+
+  function renderCalendar(){
+    renderDateList('.calendar-list', calendarData, 'cal.loading', 'cal.empty');
   }
 
   function renderSermons(){
@@ -248,9 +259,7 @@
     if (!s) return;
     var map = {
       'contact-address': s.address, 'contact-phone': s.phone, 'contact-email': s.email,
-      'hero-time-am': s.sun_am, 'hero-time-pm': s.sun_pm,
-      'program-sun-am': s.sun_am, 'program-sun-pm': s.sun_pm, 'program-friday': s.friday,
-      'glance-sun-am': s.sun_am, 'glance-sun-pm': s.sun_pm, 'glance-friday': s.friday
+      'program-sun-am': s.sun_am, 'program-sun-pm': s.sun_pm, 'program-friday': s.friday
     };
     Object.keys(map).forEach(function(id){
       var el = document.getElementById(id);
@@ -300,17 +309,17 @@
     }).catch(function(){ eventsData = []; renderEvents(); });
   }
 
-  function loadEventsFromGoogleCalendar(calendarId, apiKey){
+  function loadCalendarFromGoogle(calendarId, apiKey){
     var timeMin = new Date().toISOString();
     var url = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(calendarId) +
               '/events?key=' + encodeURIComponent(apiKey) +
-              '&singleEvents=true&orderBy=startTime&maxResults=25&timeMin=' + encodeURIComponent(timeMin);
+              '&singleEvents=true&orderBy=startTime&maxResults=12&timeMin=' + encodeURIComponent(timeMin);
     fetch(url).then(function(r){
       if (!r.ok) throw new Error('calendar fetch failed');
       return r.json();
     }).then(function(data){
       var items = data.items || [];
-      eventsData = items.map(function(ev){
+      calendarData = items.map(function(ev){
         var dateStr = null;
         if (ev.start){
           dateStr = ev.start.date || (ev.start.dateTime ? ev.start.dateTime.slice(0,10) : null);
@@ -320,10 +329,10 @@
         return { date: dateStr, title_ro: title, title_en: title, description_ro: desc, description_en: desc };
       }).filter(function(e){ return !!e.date; })
         .sort(function(a,b){ return parseDate(a.date) - parseDate(b.date); });
-      renderEvents();
+      renderCalendar();
     }).catch(function(){
-      // if the calendar call fails for any reason, fall back to the manual list
-      loadEventsFromJson();
+      calendarData = [];
+      renderCalendar();
     });
   }
 
@@ -431,10 +440,12 @@
   function loadAll(){
     fetch('settings.json').then(function(r){ return r.json(); }).then(function(s){
       applySettings(s);
+      loadEventsFromJson();
       if (s && s.google_calendar_id && s.google_api_key){
-        loadEventsFromGoogleCalendar(s.google_calendar_id, s.google_api_key);
+        loadCalendarFromGoogle(s.google_calendar_id, s.google_api_key);
       } else {
-        loadEventsFromJson();
+        calendarData = [];
+        renderCalendar();
       }
       if (s && s.youtube_channel_id && s.google_api_key){
         checkYouTubeLive(s.youtube_channel_id, s.google_api_key);

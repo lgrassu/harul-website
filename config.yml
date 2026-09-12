@@ -14,7 +14,7 @@ collections:
     files:
       - label: "Texte principale"
         name: "site-text"
-        file: "content/site-text.json"
+        file: "site-text.json"
         fields:
           - { label: "Mesaj scurt de bun venit (Română)", name: "hero_eyebrow_ro", widget: "string" }
           - { label: "Short welcome tagline (English)", name: "hero_eyebrow_en", widget: "string" }
@@ -62,7 +62,7 @@ collections:
     files:
       - label: "Membri conducere"
         name: "board"
-        file: "content/board.json"
+        file: "board.json"
         fields:
           - label: "Membri"
             name: "members"
@@ -74,11 +74,11 @@ collections:
               - { label: "Role (English)", name: "title_en", widget: "string" }
 
   - name: "events"
-    label: "Evenimente / Events"
+    label: "Evenimente / Events (ocazii speciale — botez, nuntă, sărbători)"
     files:
       - label: "Lista de evenimente"
         name: "events"
-        file: "content/events.json"
+        file: "events.json"
         fields:
           - label: "Evenimente"
             name: "events"
@@ -95,7 +95,7 @@ collections:
     files:
       - label: "Lista de predici"
         name: "sermons"
-        file: "content/sermons.json"
+        file: "sermons.json"
         fields:
           - label: "Predici"
             name: "sermons"
@@ -112,7 +112,7 @@ collections:
     files:
       - label: "Detalii biserică"
         name: "settings"
-        file: "content/settings.json"
+        file: "settings.json"
         fields:
           - { label: "Adresă / Address", name: "address", widget: "string" }
           - { label: "Telefon / Phone", name: "phone", widget: "string" }
@@ -120,6 +120,14 @@ collections:
           - { label: "Program duminică dimineața / Sunday AM", name: "sun_am", widget: "string" }
           - { label: "Program duminică seara / Sunday PM", name: "sun_pm", widget: "string" }
           - { label: "Program vineri / Friday", name: "friday", widget: "string" }
-          - { label: "Google Calendar ID", name: "google_calendar_id", widget: "string", required: false, hint: "Din setările calendarului Google, secțiunea 'Integrate calendar'." }
+          - label: "Program săptămânal (pentru caseta Calendar) / Weekly meetings (for the Calendar box)"
+            name: "weekly_schedule"
+            widget: "list"
+            fields:
+              - { label: "Zi / Day", name: "day", widget: "select", options: ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"] }
+              - { label: "Oră / Time", name: "time", widget: "string" }
+              - { label: "Denumire (Română)", name: "label_ro", widget: "string" }
+              - { label: "Label (English)", name: "label_en", widget: "string" }
+          - { label: "Google Calendar ID", name: "google_calendar_id", widget: "string", required: false, hint: "Programul recurent (duminici, miercuri, vineri) — se preia automat din Google Calendar, nu de aici." }
           - { label: "Google API Key (Calendar + YouTube)", name: "google_api_key", widget: "string", required: false, hint: "Din Google Cloud Console → Credentials. Activați atât Calendar API cât și YouTube Data API v3 pe această cheie." }
           - { label: "ID canal YouTube", name: "youtube_channel_id", widget: "string", required: false, hint: "Găsit în adresa canalului: youtube.com/channel/ACEST-ID" }
