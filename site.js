@@ -4,9 +4,9 @@
       "nav.acasa":"Acasă","nav.despre":"Despre noi","nav.program":"Program","nav.evenimente":"Evenimente","nav.predici":"Predici","nav.board":"Conducere","nav.daruire":"Dăruire","nav.contact":"Contact",
       "brand.short":"Biserica Baptistă Harul","brand.full":"Biserica Baptistă Harul din Sacramento",
 
-      "hero.eyebrow":"Vă așteptăm cu drag","hero.h1":"Bine ați venit acasă.",
-      "hero.lead":"Suntem o comunitate creștină baptistă română din Sacramento, unită prin credință, rugăciune și părtășie, după îndemnul din Coloseni 3:12 de a ne îmbrăca într-o inimă plină de îndurare și bunătate.",
-      "hero.btn1":"Vezi programul serviciilor","hero.btn2":"Ia legătura cu noi",
+      "hero.eyebrow":"Salutul bisericii","hero.h1":"Bine ați venit acasă.",
+      "hero.lead":"Ca familie de credincioși, ne zidim unii pe alții în credința noastră preasfântă, ne rugăm în Duhul Sfânt, ne păstrăm în dragostea lui Dumnezeu și așteptăm cu nădejde îndurarea Domnului nostru Isus Hristos, spre viața veșnică (Iuda 20-21). Vă așteptăm cu drag să faceți parte din această familie.",
+      "hero.btn2":"Contactează-ne",
       "herocard.title":"Duminica aceasta","herocard.row1":"Serviciul de dimineață","herocard.row2":"Serviciul de seară","herocard.row3":"Video live pe YouTube",
 
       "despre.eyebrow":"Cine suntem","despre.h2":"Despre biserica noastră",
@@ -56,9 +56,9 @@
       "nav.acasa":"Home","nav.despre":"About","nav.program":"Service Times","nav.evenimente":"Events","nav.predici":"Sermons","nav.board":"Leadership","nav.daruire":"Give","nav.contact":"Contact",
       "brand.short":"Grace Romanian Baptist Church","brand.full":"Grace Romanian Baptist Church of Sacramento",
 
-      "hero.eyebrow":"We'd love to welcome you","hero.h1":"Welcome home.",
-      "hero.lead":"We are a Romanian-speaking Baptist church family in Sacramento, united by faith, prayer, and fellowship, following the call of Colossians 3:12 to clothe ourselves with compassion and kindness.",
-      "hero.btn1":"See service times","hero.btn2":"Get in touch",
+      "hero.eyebrow":"Our Church's Greeting","hero.h1":"Welcome home.",
+      "hero.lead":"As a family of believers, we build one another up in our most holy faith, pray in the Holy Spirit, keep ourselves in the love of God, and wait in hope for the mercy of our Lord Jesus Christ unto eternal life (Jude 20-21). We'd love for you to become part of this family.",
+      "hero.btn2":"Contact Us",
       "herocard.title":"This Sunday","herocard.row1":"Morning service","herocard.row2":"Evening service","herocard.row3":"Live on YouTube",
 
       "despre.eyebrow":"Who we are","despre.h2":"About our church",

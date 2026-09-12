@@ -16,6 +16,7 @@
 }
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
+section[id]{ scroll-margin-top: 84px; }
 body{
   margin:0;
   font-family:'Source Serif 4', Georgia, serif;
