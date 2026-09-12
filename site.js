@@ -27,6 +27,7 @@
 
       "ev.eyebrow":"Ce urmează","ev.h2":"Evenimente","ev.h2page":"Toate evenimentele","ev.loading":"Se încarcă evenimentele…","ev.empty":"Nu sunt evenimente programate momentan.","ev.seeall":"Vezi toate evenimentele",
       "live.eyebrow":"Transmisie live","live.h2":"Urmărește live",
+      "glance.schedule":"Programul săptămânii",
       "ev.page.lead":"Tot ce se întâmplă în comunitatea noastră, la un loc.",
 
       "pr.eyebrow":"Ascultă din nou","pr.h2":"Predici recente","pr.h2page":"Arhiva de predici","pr.loading":"Se încarcă predicile…","pr.empty":"Nu sunt predici disponibile momentan.","pr.seeall":"Vezi toate predicile",
@@ -76,6 +77,7 @@
 
       "ev.eyebrow":"What's coming up","ev.h2":"Events","ev.h2page":"All Events","ev.loading":"Loading events…","ev.empty":"No events scheduled right now.","ev.seeall":"See all events",
       "live.eyebrow":"Live stream","live.h2":"Watch Live",
+      "glance.schedule":"This Week's Schedule",
       "ev.page.lead":"Everything happening in our community, in one place.",
 
       "pr.eyebrow":"Listen again","pr.h2":"Recent Sermons","pr.h2page":"Sermon Archive","pr.loading":"Loading sermons…","pr.empty":"No sermons available right now.","pr.seeall":"See all sermons",
@@ -173,22 +175,24 @@
   }
 
   function renderEvents(){
-    var container = document.getElementById('events-list');
-    if (!container) return;
-    var limit = container.getAttribute('data-limit');
-    if (!eventsData){ container.innerHTML = '<p class="empty-note">' + I18N[currentLang]['ev.loading'] + '</p>'; return; }
-    var list = eventsData;
-    if (limit) list = list.slice(0, parseInt(limit,10));
-    if (!list.length){ container.innerHTML = '<p class="empty-note">' + I18N[currentLang]['ev.empty'] + '</p>'; return; }
-    container.innerHTML = list.map(function(ev){
-      var d = parseDate(ev.date);
-      var num = String(d.getDate()).padStart(2,'0');
-      var mon = MONTHS_SHORT[currentLang][d.getMonth()];
-      var title = currentLang === 'en' ? (ev.title_en || ev.title_ro) : (ev.title_ro || ev.title_en);
-      var desc = currentLang === 'en' ? (ev.description_en || ev.description_ro) : (ev.description_ro || ev.description_en);
-      return '<div class="event"><div class="date"><span class="num">'+num+'</span><span class="mon">'+mon+'</span></div>' +
-             '<div><h4>'+escapeHtml(title)+'</h4><p>'+escapeHtml(desc)+'</p></div></div>';
-    }).join('');
+    var containers = document.querySelectorAll('.events-list');
+    if (!containers.length) return;
+    containers.forEach(function(container){
+      var limit = container.getAttribute('data-limit');
+      if (!eventsData){ container.innerHTML = '<p class="empty-note">' + I18N[currentLang]['ev.loading'] + '</p>'; return; }
+      var list = eventsData;
+      if (limit) list = list.slice(0, parseInt(limit,10));
+      if (!list.length){ container.innerHTML = '<p class="empty-note">' + I18N[currentLang]['ev.empty'] + '</p>'; return; }
+      container.innerHTML = list.map(function(ev){
+        var d = parseDate(ev.date);
+        var num = String(d.getDate()).padStart(2,'0');
+        var mon = MONTHS_SHORT[currentLang][d.getMonth()];
+        var title = currentLang === 'en' ? (ev.title_en || ev.title_ro) : (ev.title_ro || ev.title_en);
+        var desc = currentLang === 'en' ? (ev.description_en || ev.description_ro) : (ev.description_ro || ev.description_en);
+        return '<div class="event"><div class="date"><span class="num">'+num+'</span><span class="mon">'+mon+'</span></div>' +
+               '<div><h4>'+escapeHtml(title)+'</h4><p>'+escapeHtml(desc)+'</p></div></div>';
+      }).join('');
+    });
   }
 
   function renderSermons(){
@@ -245,7 +249,8 @@
     var map = {
       'contact-address': s.address, 'contact-phone': s.phone, 'contact-email': s.email,
       'hero-time-am': s.sun_am, 'hero-time-pm': s.sun_pm,
-      'program-sun-am': s.sun_am, 'program-sun-pm': s.sun_pm, 'program-friday': s.friday
+      'program-sun-am': s.sun_am, 'program-sun-pm': s.sun_pm, 'program-friday': s.friday,
+      'glance-sun-am': s.sun_am, 'glance-sun-pm': s.sun_pm, 'glance-friday': s.friday
     };
     Object.keys(map).forEach(function(id){
       var el = document.getElementById(id);
@@ -259,9 +264,11 @@
     if (footer && s.address && s.phone){
       footer.textContent = s.address + ' · ' + s.phone;
     }
-    var liveEmbed = document.getElementById('live-embed');
-    if (liveEmbed && s.youtube_channel_id){
-      liveEmbed.src = 'https://www.youtube.com/embed/live_stream?channel=' + encodeURIComponent(s.youtube_channel_id);
+    var liveEmbeds = document.querySelectorAll('.live-embed');
+    if (liveEmbeds.length && s.youtube_channel_id){
+      liveEmbeds.forEach(function(el){
+        el.src = 'https://www.youtube.com/embed/live_stream?channel=' + encodeURIComponent(s.youtube_channel_id);
+      });
     }
   }
 

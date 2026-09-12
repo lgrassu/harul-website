@@ -371,6 +371,36 @@ footer .foot-links a:hover{ color:var(--gold-light); }
 }
 @keyframes live-pulse{ 0%,100%{opacity:1;} 50%{opacity:.35;} }
 
+/* ---- at-a-glance row: schedule + events + live video ---- */
+.glance-grid{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:24px; align-items:start;
+}
+.glance-box{
+  background:#fff; border:1px solid var(--line); border-radius:var(--radius); padding:24px;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.7), 0 1px 3px rgba(20,33,61,.05);
+}
+.glance-box h3{
+  font-size:1rem; margin-bottom:14px; color:var(--navy); font-family:'Source Serif 4';
+  font-weight:700; text-transform:uppercase; letter-spacing:.06em;
+}
+.glance-box .time-row{
+  display:flex; justify-content:space-between; padding:9px 0;
+  border-bottom:1px dashed var(--line); font-size:.9rem; color:var(--ink-soft);
+}
+.glance-box .time-row:last-child{ border-bottom:none; }
+.glance-box .time-row span:last-child{ font-weight:700; color:var(--navy); }
+.glance-box .events-list{ gap:10px; }
+.glance-box .event{ padding:12px 14px; gap:14px; grid-template-columns:60px 1fr; }
+.glance-box .event .date{ padding:8px 0; }
+.glance-box .event .date .num{ font-size:1.1rem; }
+.glance-box .event h4{ font-size:.92rem; }
+.glance-box .event p{ display:none; }
+.glance-link{
+  display:inline-block; margin-top:14px; font-size:.82rem; font-weight:700;
+  color:var(--burgundy); text-decoration:none; border-bottom:1px solid var(--burgundy);
+}
+.glance-box-video .live-embed-wrap{ margin-top:2px; }
+
 /* ---- persistent live embed (dark when offline, live video when streaming) ---- */
 .live-embed-wrap{
   position:relative; width:100%; padding-top:56.25%;
@@ -385,6 +415,7 @@ footer .foot-links a:hover{ color:var(--gold-light); }
   .hero-grid, .about-grid, .contact-grid{grid-template-columns:1fr;}
   .times-grid, .sermon-grid{grid-template-columns:1fr;}
   .board-grid{ grid-template-columns:repeat(2,1fr); }
+  .glance-grid{ grid-template-columns:1fr; }
   .give-wrap{grid-template-columns:1fr; padding:36px 28px;}
   .brand{ font-size:.95rem; line-height:1.25; }
   nav.links{
