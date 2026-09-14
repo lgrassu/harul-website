@@ -4,6 +4,14 @@
   "youtube_channel_id": "UCf5mfUpzylDw2VsaT_wyTCg",
   "google_api_key": "AIzaSyCo0093RSSTEY3UW0r0YRQQkH36YSa7Ztk",
   "address": "3832 Whitney Ave., Sacramento, CA 95821",
+  "weekly_schedule": [
+    {
+      "day": "sunday",
+      "time": "10:00",
+      "label_ro": "el este implicat",
+      "label_en": "he is involved"
+    }
+  ],
   "google_calendar_id": "grbcsac@gmail.com",
   "email": "info@graceromanianbaptistchurch.org",
   "friday": "7:00 – 8:00 PM",
