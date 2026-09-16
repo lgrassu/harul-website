@@ -359,7 +359,11 @@
 
   function loadEventsFromJson(){
     fetch('events.json').then(function(r){ return r.json(); }).then(function(data){
-      eventsData = (data.events || []).slice().sort(function(a,b){ return parseDate(a.date) - parseDate(b.date); });
+      var today = new Date();
+      today.setHours(0,0,0,0);
+      eventsData = (data.events || [])
+        .filter(function(e){ return parseDate(e.date) >= today; })
+        .sort(function(a,b){ return parseDate(a.date) - parseDate(b.date); });
       renderEvents();
     }).catch(function(){ eventsData = []; renderEvents(); });
   }
