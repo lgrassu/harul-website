@@ -123,7 +123,17 @@
       <div class="give-methods">
         <div class="give-method"><strong data-i18n="dr.method1.strong">În timpul serviciului</strong><span data-i18n="dr.method1.body">Coșuri de dăruire disponibile duminica.</span></div>
         <div class="give-method"><strong data-i18n="dr.method2.strong">Transfer bancar</strong><span data-i18n="dr.method2.body">Detalii disponibile la secretariatul bisericii.</span></div>
-        <div class="give-method"><strong data-i18n="dr.method3.strong">Online, prin PayPal</strong><a href="https://www.paypal.com/us/mrb/pal=WC5EWXNR7VAXS" target="_blank" rel="noopener" style="color:#fff; text-decoration:underline;" data-i18n="dr.method3.link">Donați online prin PayPal</a></div>
+        <div class="give-method">
+          <strong data-i18n="dr.method3.strong">Online, prin PayPal</strong>
+          <p style="margin:0 0 12px; font-size:.85rem; color:rgba(255,255,255,.75);" data-i18n="dr.method3.note">Darurile merg direct în contul bisericii. Veți primi o chitanță deductibilă fiscal la sfârșitul anului.</p>
+          <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" style="margin:0;">
+            <input type="hidden" name="cmd" value="_donations">
+            <input type="hidden" name="business" value="GRBChurchBudget@gmail.com">
+            <input type="hidden" name="currency_code" value="USD">
+            <input type="hidden" name="item_name" value="Donație — Biserica Baptistă Harul">
+            <button type="submit" class="btn" style="background:#fff; color:var(--burgundy); border:none; cursor:pointer; font-size:.85rem; padding:10px 22px;" data-i18n="dr.method3.link">Donați online prin PayPal</button>
+          </form>
+        </div>
       </div>
     </div>
   </div>

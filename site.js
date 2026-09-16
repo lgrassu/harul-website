@@ -43,6 +43,7 @@
       "dr.method1.strong":"În timpul serviciului","dr.method1.body":"Coșuri de dăruire disponibile duminica.",
       "dr.method2.strong":"Transfer bancar","dr.method2.body":"Detalii disponibile la secretariatul bisericii.",
       "dr.method3.strong":"Online, prin PayPal","dr.method3.link":"Donați online prin PayPal",
+      "dr.method3.note":"Darurile merg direct în contul bisericii. Veți primi o chitanță deductibilă fiscal la sfârșitul anului.",
 
       "ct.eyebrow":"Ia legătura","ct.h2":"Contact",
       "ct.addressLabel":"Adresă","ct.phoneLabel":"Telefon","ct.emailLabel":"Email","ct.scheduleLabel":"Program","ct.socialLabel":"Ne găsiți și pe",
@@ -95,6 +96,7 @@
       "dr.method1.strong":"During the service","dr.method1.body":"Offering baskets available on Sundays.",
       "dr.method2.strong":"Bank transfer","dr.method2.body":"Details available from the church office.",
       "dr.method3.strong":"Online, via PayPal","dr.method3.link":"Donate online via PayPal",
+      "dr.method3.note":"Gifts go directly into the church's account. You'll receive a tax-deductible receipt at the end of the year.",
 
       "ct.eyebrow":"Get in touch","ct.h2":"Contact",
       "ct.addressLabel":"Address","ct.phoneLabel":"Phone","ct.emailLabel":"Email","ct.scheduleLabel":"Schedule","ct.socialLabel":"Find us on",
