@@ -15,6 +15,14 @@
       "description_ro": "Prânz comun după serviciul de duminică — toți sunt bineveniți.",
       "description_en": "A shared lunch after the Sunday service — everyone is welcome.",
       "time": "10:00 AM"
+    },
+    {
+      "date": "2026-09-16",
+      "time": "7",
+      "title_ro": "inatlnire",
+      "title_en": "meeting",
+      "description_ro": "tineret",
+      "description_en": "youth"
     }
   ]
 }
