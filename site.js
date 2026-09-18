@@ -415,7 +415,8 @@
               }
             }
             var title = splitBilingual(ev.summary || '');
-            return { date: dateStr, time: timeStr, title_ro: title.ro, title_en: title.en };
+            var desc = splitBilingual(ev.description || '');
+            return { date: dateStr, time: timeStr, title_ro: title.ro, title_en: title.en, description_ro: desc.ro, description_en: desc.en };
           }).filter(function(e){ return !!e.date; });
           renderPrintCalendar();
         }).catch(function(){ pcalCalendarData = []; renderPrintCalendar(); });
