@@ -447,22 +447,24 @@
     }
 
     var byDay = {};
-    function addToDay(dateStr, title, time){
+    function addToDay(dateStr, title, time, desc){
       if (!byDay[dateStr]) byDay[dateStr] = [];
-      byDay[dateStr].push({ title: title, time: time || '' });
+      byDay[dateStr].push({ title: title, time: time || '', desc: desc || '' });
     }
     pcalEventsData.forEach(function(e){
       var d = parseDate(e.date);
       if (d.getFullYear() === pcalViewYear && d.getMonth() === pcalViewMonth){
         var title = currentLang === 'en' ? (e.title_en || e.title_ro) : (e.title_ro || e.title_en);
-        addToDay(e.date, title, e.time);
+        var desc = currentLang === 'en' ? (e.description_en || e.description_ro) : (e.description_ro || e.description_en);
+        addToDay(e.date, title, e.time, desc);
       }
     });
     pcalCalendarData.forEach(function(e){
       var d = parseDate(e.date);
       if (d.getFullYear() === pcalViewYear && d.getMonth() === pcalViewMonth){
         var title = currentLang === 'en' ? (e.title_en || e.title_ro) : (e.title_ro || e.title_en);
-        addToDay(e.date, title, e.time);
+        var desc = currentLang === 'en' ? (e.description_en || e.description_ro) : (e.description_ro || e.description_en);
+        addToDay(e.date, title, e.time, desc);
       }
     });
 
@@ -488,7 +490,8 @@
       html += '<div class="pcal-cell' + (isToday ? ' today' : '') + '"><div class="pcal-daynum">' + day + '</div>';
       (byDay[key] || []).forEach(function(ev){
         html += '<div class="pcal-event"><strong>' + escapeHtml(ev.title) + '</strong>' +
-                (ev.time ? '<span>' + escapeHtml(ev.time) + '</span>' : '') + '</div>';
+                (ev.time ? '<span>' + escapeHtml(ev.time) + '</span>' : '') +
+                (ev.desc ? '<em>' + escapeHtml(ev.desc) + '</em>' : '') + '</div>';
       });
       html += '</div>';
     }
