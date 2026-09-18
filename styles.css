@@ -315,6 +315,11 @@ a.sermon-card:hover{
   display:grid; grid-template-columns:1.2fr .8fr; gap:40px; align-items:center;
   border:1px solid var(--gold);
 }
+.give-wrap-small{
+  padding:32px 34px; gap:28px; grid-template-columns:1fr .7fr; max-width:760px; margin:0 auto;
+}
+.give-wrap-small h2{ font-size:1.4rem; }
+.give-wrap-small p{ font-size:.92rem; }
 .give-wrap h2{color:#fff;}
 .give-wrap .eyebrow{ color:var(--gold-light); }
 .give-wrap .eyebrow::before{ background:var(--gold-light); }
