@@ -468,3 +468,50 @@ footer .foot-links a:hover{ color:var(--gold-light); }
   .btn{transition:none;}
   .hero-grid > div:first-child > *, .hero-card{ animation:none; opacity:1; transform:none; }
 }
+
+/* ---- printable month calendar page ---- */
+.print-cal-toolbar{
+  display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+}
+.print-cal-section{ padding:24px 0 64px; }
+.print-only-title{ display:none; }
+.pcal-grid{
+  display:grid; grid-template-columns:repeat(7,1fr); gap:1px;
+  background:var(--line); border:1px solid var(--line); border-radius:var(--radius);
+  overflow:hidden;
+}
+.pcal-dayname{
+  background:var(--navy); color:#fff; text-align:center; padding:8px 4px;
+  font-family:'Source Serif 4'; font-weight:700; font-size:.75rem;
+  text-transform:uppercase; letter-spacing:.05em;
+}
+.pcal-cell{
+  background:#fff; min-height:110px; padding:6px 8px; font-size:.78rem;
+  display:flex; flex-direction:column; gap:3px;
+}
+.pcal-cell.empty{ background:var(--cream); }
+.pcal-cell .pcal-daynum{
+  font-family:'Playfair Display'; font-weight:700; color:var(--navy); font-size:.95rem;
+}
+.pcal-cell .pcal-event{
+  background:var(--sky, #EEF3F7); background:rgba(20,33,61,.06);
+  border-left:2px solid var(--burgundy); border-radius:2px;
+  padding:2px 4px; font-size:.7rem; line-height:1.25; color:var(--ink);
+}
+.pcal-cell .pcal-event strong{ display:block; font-size:.7rem; }
+.pcal-cell .pcal-event span{ display:block; color:var(--ink-soft); font-size:.66rem; }
+.pcal-cell.today{ outline:2px solid var(--gold); outline-offset:-2px; }
+
+@media print{
+  .no-print{ display:none !important; }
+  body{ background:#fff; }
+  .print-cal-section{ padding:0; }
+  .print-only-title{
+    display:block; text-align:center; font-family:'Playfair Display';
+    margin:0 0 12px; font-size:1.3rem; color:var(--navy);
+  }
+  .print-cal-wrap{ max-width:none; padding:0; }
+  .pcal-cell{ min-height:90px; font-size:.72rem; }
+  .pcal-grid{ page-break-inside:avoid; }
+  @page{ size:letter landscape; margin:0.4in; }
+}

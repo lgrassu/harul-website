@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Predici — Biserica Baptistă Harul</title>
+<title>Calendar de tipărit — Biserica Baptistă Harul</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Source+Serif+4:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
@@ -12,9 +12,9 @@
 </head>
 <body>
 
-<header class="site">
+<header class="site no-print">
   <div class="nav-inner">
-    <a href="index.html#top" class="brand"><span class="mark"><img src="logo.png" alt="Sigla Biserica Baptistă Harul"></span> <span data-i18n="brand.full">Biserica Baptistă Harul din Sacramento</span></a>
+    <a href="index.html#top" class="brand"><span class="mark"><img src="logo.png" alt="Sigla Biserica Baptistă Harul"></span> <span data-i18n="brand.short">Biserica Baptistă Harul</span></a>
     <div class="nav-right">
     <nav class="links">
       <a href="index.html" data-page="index.html" data-i18n="nav.acasa">Acasă</a>
@@ -35,29 +35,40 @@
   </div>
 </header>
 
-<div class="page-header">
+<div class="page-header no-print">
   <img src="logo-lineart.png" alt="" class="hero-watermark">
   <div class="wrap">
-    <p class="eyebrow" data-i18n="pr.eyebrow">Ascultă din nou</p>
-    <h1 data-i18n="pr.h2page">Arhiva de predici</h1>
-    <p class="lead" data-i18n="pr.page.lead">Ascultă din nou mesajele din duminicile trecute.</p>
+    <p class="eyebrow" data-i18n="pcal.eyebrow">Pentru tipărire</p>
+    <h1 data-i18n="pcal.h1">Calendar lunar</h1>
+    <p class="lead" data-i18n="pcal.lead">Vezi și tipărește toate evenimentele și întâlnirile lunii, pe o singură pagină.</p>
   </div>
 </div>
 
-<section>
+<section class="no-print">
   <div class="wrap">
-    <div class="sermon-grid" id="sermon-grid">
-      <p class="empty-note" data-i18n="pr.loading">Se încarcă predicile…</p>
+    <div class="print-cal-toolbar">
+      <button type="button" id="pcal-prev" class="btn btn-ghost" style="border-color:var(--line); color:var(--navy);">←</button>
+      <h2 id="pcal-month-label" style="margin:0; min-width:220px; text-align:center;">Septembrie 2026</h2>
+      <button type="button" id="pcal-next" class="btn btn-ghost" style="border-color:var(--line); color:var(--navy);">→</button>
+      <button type="button" id="pcal-print" class="btn btn-primary" style="margin-left:auto;" data-i18n="pcal.printbtn">Tipărește această pagină</button>
     </div>
   </div>
 </section>
 
-<footer>
+<section class="print-cal-section">
+  <div class="wrap print-cal-wrap">
+    <h2 id="pcal-print-title" class="print-only-title">Septembrie 2026 — Biserica Baptistă Harul</h2>
+    <div id="pcal-grid" class="pcal-grid">
+      <p class="empty-note" data-i18n="pcal.loading">Se încarcă...</p>
+    </div>
+  </div>
+</section>
+
+<footer class="no-print">
   <div class="wrap">
     <a href="index.html#top" class="brand"><span class="mark"><img src="logo.png" alt="Sigla Biserica Baptistă Harul"></span> <span data-i18n="brand.full">Biserica Baptistă Harul din Sacramento</span></a>
     <div class="foot-links">
       <a href="index.html" data-i18n="nav.acasa">Acasă</a>
-      <a href="despre.html" data-i18n="nav.despre">Despre noi</a>
       <a href="events.html" data-i18n="nav.evenimente">Evenimente</a>
       <a href="calendar.html" data-i18n="cal.h2">Calendar</a>
       <a href="sermons.html" data-i18n="nav.predici">Predici</a>

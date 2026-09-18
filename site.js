@@ -29,6 +29,10 @@
       "live.eyebrow":"Transmisie live","live.h2":"Urmărește live",
       "glance.schedule":"Programul săptămânii",
       "cal.h2":"Calendar","cal.loading":"Se încarcă…","cal.empty":"Nu sunt întâlniri programate momentan.",
+      "cal.printlink":"Vezi și tipărește calendarul lunar",
+      "pcal.eyebrow":"Pentru tipărire","pcal.h1":"Calendar lunar",
+      "pcal.lead":"Vezi și tipărește toate evenimentele și întâlnirile lunii, pe o singură pagină.",
+      "pcal.printbtn":"Tipărește această pagină","pcal.loading":"Se încarcă...",
       "ev.page.lead":"Tot ce se întâmplă în comunitatea noastră, la un loc.",
 
       "pr.eyebrow":"Ascultă din nou","pr.h2":"Predici recente","pr.h2page":"Arhiva de predici","pr.loading":"Se încarcă predicile…","pr.empty":"Nu sunt predici disponibile momentan.","pr.seeall":"Vezi toate predicile",
@@ -82,6 +86,10 @@
       "live.eyebrow":"Live stream","live.h2":"Watch Live",
       "glance.schedule":"This Week's Schedule",
       "cal.h2":"Calendar","cal.loading":"Loading…","cal.empty":"No meetings scheduled right now.",
+      "cal.printlink":"View and print the monthly calendar",
+      "pcal.eyebrow":"For printing","pcal.h1":"Monthly Calendar",
+      "pcal.lead":"View and print all of this month's events and meetings on a single page.",
+      "pcal.printbtn":"Print this page","pcal.loading":"Loading...",
       "ev.page.lead":"Everything happening in our community, in one place.",
 
       "pr.eyebrow":"Listen again","pr.h2":"Recent Sermons","pr.h2page":"Sermon Archive","pr.loading":"Loading sermons…","pr.empty":"No sermons available right now.","pr.seeall":"See all sermons",
@@ -114,6 +122,7 @@
 
   var currentLang = localStorage.getItem('church-lang') || 'ro';
   var eventsData = null, sermonsData = null, boardData = null, calendarData = null;
+  var pcalViewYear = null, pcalViewMonth = null, pcalEventsData = null, pcalCalendarData = null, pcalSettingsCache = null;
   var liveVideoId = null;
 
   function applyLang(){
@@ -136,6 +145,7 @@
     renderSermons();
     renderBoard();
     renderLiveBanner();
+    renderPrintCalendar();
   }
 
   function setLang(lang){
@@ -370,6 +380,160 @@
     }).catch(function(){ eventsData = []; renderEvents(); });
   }
 
+  function pad2(n){ return String(n).padStart(2,'0'); }
+
+  function fetchPrintCalendarMonth(){
+    var grid = document.getElementById('pcal-grid');
+    if (!grid) return;
+    var firstDay = new Date(pcalViewYear, pcalViewMonth, 1);
+    var nextMonthFirst = new Date(pcalViewYear, pcalViewMonth + 1, 1);
+
+    // manual events for this month, from events.json (unfiltered by "upcoming")
+    fetch('events.json').then(function(r){ return r.json(); }).then(function(data){
+      pcalEventsData = data.events || [];
+      renderPrintCalendar();
+    }).catch(function(){ pcalEventsData = []; renderPrintCalendar(); });
+
+    // calendar entries for this specific month, from Google Calendar
+    if (pcalSettingsCache && pcalSettingsCache.google_calendar_id && pcalSettingsCache.google_api_key){
+      var url = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(pcalSettingsCache.google_calendar_id) +
+                '/events?key=' + encodeURIComponent(pcalSettingsCache.google_api_key) +
+                '&singleEvents=true&orderBy=startTime&maxResults=100' +
+                '&timeMin=' + encodeURIComponent(firstDay.toISOString()) +
+                '&timeMax=' + encodeURIComponent(nextMonthFirst.toISOString());
+      fetch(url).then(function(r){ if (!r.ok) throw new Error('fail'); return r.json(); })
+        .then(function(data){
+          var items = data.items || [];
+          pcalCalendarData = items.map(function(ev){
+            var dateStr = null, timeStr = '';
+            if (ev.start){
+              if (ev.start.dateTime){
+                dateStr = ev.start.dateTime.slice(0,10);
+                timeStr = formatTime12(new Date(ev.start.dateTime));
+              } else {
+                dateStr = ev.start.date;
+              }
+            }
+            var title = splitBilingual(ev.summary || '');
+            return { date: dateStr, time: timeStr, title_ro: title.ro, title_en: title.en };
+          }).filter(function(e){ return !!e.date; });
+          renderPrintCalendar();
+        }).catch(function(){ pcalCalendarData = []; renderPrintCalendar(); });
+    } else {
+      pcalCalendarData = [];
+      renderPrintCalendar();
+    }
+  }
+
+  function renderPrintCalendar(){
+    var grid = document.getElementById('pcal-grid');
+    if (!grid) return;
+    if (pcalViewYear === null){
+      var now = new Date();
+      pcalViewYear = now.getFullYear();
+      pcalViewMonth = now.getMonth();
+    }
+    var label = document.getElementById('pcal-month-label');
+    var printTitle = document.getElementById('pcal-print-title');
+    var monthName = MONTHS_LONG[currentLang][pcalViewMonth];
+    var monthCap = monthName.charAt(0).toUpperCase() + monthName.slice(1);
+    var labelText = monthCap + ' ' + pcalViewYear;
+    if (label) label.textContent = labelText;
+    if (printTitle) printTitle.textContent = labelText + ' — Biserica Baptistă Harul';
+
+    if (pcalEventsData === null || pcalCalendarData === null){
+      grid.innerHTML = '<p class="empty-note">' + I18N[currentLang]['pcal.loading'] + '</p>';
+      return;
+    }
+
+    var byDay = {};
+    function addToDay(dateStr, title, time){
+      if (!byDay[dateStr]) byDay[dateStr] = [];
+      byDay[dateStr].push({ title: title, time: time || '' });
+    }
+    pcalEventsData.forEach(function(e){
+      var d = parseDate(e.date);
+      if (d.getFullYear() === pcalViewYear && d.getMonth() === pcalViewMonth){
+        var title = currentLang === 'en' ? (e.title_en || e.title_ro) : (e.title_ro || e.title_en);
+        addToDay(e.date, title, e.time);
+      }
+    });
+    pcalCalendarData.forEach(function(e){
+      var d = parseDate(e.date);
+      if (d.getFullYear() === pcalViewYear && d.getMonth() === pcalViewMonth){
+        var title = currentLang === 'en' ? (e.title_en || e.title_ro) : (e.title_ro || e.title_en);
+        addToDay(e.date, title, e.time);
+      }
+    });
+
+    var dayNamesRo = ['Dum','Lun','Mar','Mie','Joi','Vin','Sâm'];
+    var dayNamesEn = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+    var dayNames = currentLang === 'en' ? dayNamesEn : dayNamesRo;
+
+    var html = '';
+    dayNames.forEach(function(n){ html += '<div class="pcal-dayname">' + n + '</div>'; });
+
+    var firstOfMonth = new Date(pcalViewYear, pcalViewMonth, 1);
+    var startWeekday = firstOfMonth.getDay();
+    var daysInMonth = new Date(pcalViewYear, pcalViewMonth + 1, 0).getDate();
+    var now2 = new Date();
+    var todayStr = now2.getFullYear() + '-' + pad2(now2.getMonth()+1) + '-' + pad2(now2.getDate());
+
+    for (var i = 0; i < startWeekday; i++){
+      html += '<div class="pcal-cell empty"></div>';
+    }
+    for (var day = 1; day <= daysInMonth; day++){
+      var key = pcalViewYear + '-' + pad2(pcalViewMonth+1) + '-' + pad2(day);
+      var isToday = key === todayStr;
+      html += '<div class="pcal-cell' + (isToday ? ' today' : '') + '"><div class="pcal-daynum">' + day + '</div>';
+      (byDay[key] || []).forEach(function(ev){
+        html += '<div class="pcal-event"><strong>' + escapeHtml(ev.title) + '</strong>' +
+                (ev.time ? '<span>' + escapeHtml(ev.time) + '</span>' : '') + '</div>';
+      });
+      html += '</div>';
+    }
+    var totalCells = startWeekday + daysInMonth;
+    var remainder = totalCells % 7;
+    if (remainder > 0){
+      for (var j = 0; j < (7 - remainder); j++){
+        html += '<div class="pcal-cell empty"></div>';
+      }
+    }
+    grid.innerHTML = html;
+  }
+
+  function initPrintCalendar(){
+    var grid = document.getElementById('pcal-grid');
+    if (!grid) return;
+    var now = new Date();
+    pcalViewYear = now.getFullYear();
+    pcalViewMonth = now.getMonth();
+
+    var prevBtn = document.getElementById('pcal-prev');
+    var nextBtn = document.getElementById('pcal-next');
+    var printBtn = document.getElementById('pcal-print');
+    if (prevBtn) prevBtn.addEventListener('click', function(){
+      pcalViewMonth--;
+      if (pcalViewMonth < 0){ pcalViewMonth = 11; pcalViewYear--; }
+      pcalCalendarData = null;
+      renderPrintCalendar();
+      fetchPrintCalendarMonth();
+    });
+    if (nextBtn) nextBtn.addEventListener('click', function(){
+      pcalViewMonth++;
+      if (pcalViewMonth > 11){ pcalViewMonth = 0; pcalViewYear++; }
+      pcalCalendarData = null;
+      renderPrintCalendar();
+      fetchPrintCalendarMonth();
+    });
+    if (printBtn) printBtn.addEventListener('click', function(){ window.print(); });
+
+    fetch('settings.json').then(function(r){ return r.json(); }).then(function(s){
+      pcalSettingsCache = s;
+      fetchPrintCalendarMonth();
+    }).catch(function(){ pcalSettingsCache = {}; pcalCalendarData = []; fetchPrintCalendarMonth(); });
+  }
+
   function loadCalendarFromGoogle(calendarId, apiKey){
     var timeMin = new Date().toISOString();
     var url = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(calendarId) +
@@ -541,6 +705,7 @@
     initLangToggle();
     initMobileNav();
     initContactForm();
+    initPrintCalendar();
     markCurrentNav();
     loadAll();
     applyLang();
