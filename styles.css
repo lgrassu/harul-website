@@ -263,7 +263,7 @@ section.alt{background:#fff; border-top:1px solid var(--line); border-bottom:1px
 .event .date .mon{font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.7);}
 .event h4{margin:0 0 4px; font-size:1.02rem; font-family:'Playfair Display'; color:var(--navy);}
 .event-time{ font-family:'Source Serif 4'; font-weight:600; font-size:.82em; color:var(--burgundy); }
-.event p{margin:0; font-size:.88rem; color:var(--ink-soft);}
+.event p{margin:0; font-size:.88rem; color:var(--ink-soft); white-space:pre-line;}
 .empty-note{color:var(--ink-soft); font-style:italic; font-size:.92rem;}
 
 /* sermons */
@@ -411,7 +411,7 @@ footer .foot-links a:hover{ color:var(--gold-light); }
 .glance-box .event .date{ padding:8px 0; }
 .glance-box .event .date .num{ font-size:1.1rem; }
 .glance-box .event h4{ font-size:.92rem; }
-.glance-box .event p{ display:block; margin:4px 0 0; font-size:.82rem; color:var(--ink-soft); line-height:1.4; }
+.glance-box .event p{ display:block; margin:4px 0 0; font-size:.82rem; color:var(--ink-soft); line-height:1.4; white-space:pre-line; }
 .glance-link{
   display:inline-block; margin-top:14px; font-size:.82rem; font-weight:700;
   color:var(--burgundy); text-decoration:none; border-bottom:1px solid var(--burgundy);
@@ -430,7 +430,7 @@ footer .foot-links a:hover{ color:var(--gold-light); }
 .hero-card .event .date .mon{ color:var(--navy); opacity:.75; }
 .hero-card .event h4{ font-size:.88rem; margin:0 0 3px; color:#fff; }
 .hero-card .event-time{ color:var(--gold-light); }
-.hero-card .event p{ display:block; margin:0; font-size:.78rem; color:rgba(255,255,255,.65); line-height:1.4; }
+.hero-card .event p{ display:block; margin:0; font-size:.78rem; color:rgba(255,255,255,.65); line-height:1.4; white-space:pre-line; }
 .hero-card .empty-note{ color:rgba(255,255,255,.6); }
 .hero-link{ color:var(--gold-light) !important; border-bottom-color:var(--gold-light) !important; }
 .glance-box-video .live-embed-wrap{ margin-top:2px; }
