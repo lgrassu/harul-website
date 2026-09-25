@@ -17,17 +17,6 @@
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="favicon-180.png">
 <link rel="manifest" href="manifest.json">
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-  window.OneSignalDeferred = window.OneSignalDeferred || [];
-  OneSignalDeferred.push(function(OneSignal) {
-    OneSignal.init({
-      appId: "ea44f22c-51e2-43e6-9171-d4b3dc63a1bf",
-      serviceWorkerPath: "sw.js",
-      serviceWorkerParam: { scope: "/" }
-    });
-  });
-</script>
 <meta name="theme-color" content="#6B1E2B">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -71,32 +60,32 @@
       </div>
     </div>
     <div class="hero-card">
-      <h3 data-i18n="ev.h2">Evenimente</h3>
-      <div class="events-list" data-limit="4">
-        <p class="empty-note" data-i18n="ev.loading">Se încarcă evenimentele…</p>
+      <h3 data-i18n="cal.h2">Calendar</h3>
+      <div class="calendar-list" data-limit="4">
+        <p class="empty-note" data-i18n="cal.loading">Se încarcă…</p>
       </div>
-      <a href="events.html" class="glance-link hero-link" data-i18n="ev.seeall">Vezi toate evenimentele</a>
+      <a href="calendar.html" class="glance-link hero-link" data-i18n="cal.printlink">Vezi și tipărește calendarul lunar</a>
     </div>
   </div>
 </section>
 
 <section class="alt" id="glance">
   <div class="wrap">
-    <div class="glance-grid glance-grid-2">
-      <div class="glance-box">
-        <p class="eyebrow glance-eyebrow" data-i18n="program.eyebrow">Program</p>
-        <h3 data-i18n="cal.h2">Calendar</h3>
-        <div class="calendar-list" data-limit="6">
-          <p class="empty-note" data-i18n="cal.loading">Se încarcă…</p>
-        </div>
-        <a href="calendar.html" class="glance-link" data-i18n="cal.printlink">Vezi și tipărește calendarul lunar</a>
-      </div>
+    <div class="glance-grid glance-live-sermons">
       <div class="glance-box glance-box-video">
         <p class="eyebrow glance-eyebrow" data-i18n="live.eyebrow">Transmisie live</p>
         <h3 data-i18n="live.h2">Urmărește live</h3>
         <div class="live-embed-wrap">
           <iframe class="live-embed" src="" title="Live" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen loading="lazy"></iframe>
         </div>
+      </div>
+      <div class="glance-box glance-box-sermons" id="predici">
+        <p class="eyebrow glance-eyebrow" data-i18n="pr.eyebrow">Ascultă din nou</p>
+        <h3 data-i18n="pr.h2">Predici recente</h3>
+        <div class="sermon-grid" id="sermon-grid" data-limit="3">
+          <p class="empty-note" data-i18n="pr.loading">Se încarcă predicile…</p>
+        </div>
+        <a href="sermons.html" class="glance-link" data-i18n="pr.seeall">Vezi toate predicile</a>
       </div>
     </div>
   </div>
@@ -119,19 +108,6 @@
         <div class="value"><div><h4 data-i18n="value3.title">Slujire cu bucurie</h4><p data-i18n="value3.body">Implicare activă în comunitate, misiune și ajutorare.</p></div></div>
       </div>
     </div>
-  </div>
-</section>
-
-<section class="alt" id="predici">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow" data-i18n="pr.eyebrow">Ascultă din nou</p>
-      <h2 data-i18n="pr.h2">Predici recente</h2>
-    </div>
-    <div class="sermon-grid" id="sermon-grid" data-limit="3">
-      <p class="empty-note" data-i18n="pr.loading">Se încarcă predicile…</p>
-    </div>
-    <div class="section-foot"><a href="sermons.html" class="btn btn-ghost" style="border-color:var(--line); color:var(--navy);" data-i18n="pr.seeall">Vezi toate predicile</a></div>
   </div>
 </section>
 

@@ -721,3 +721,87 @@
     });
   }
 })();
+
+// ===== Calendar: group events on the same day under one date box =====
+(function () {
+  function group(list) {
+    if (list.dataset.grouping) return;
+    list.dataset.grouping = '1';
+    var prev = null, prevKey = '';
+    Array.prototype.slice.call(list.querySelectorAll(':scope > .event')).forEach(function (ev) {
+      var d = ev.querySelector(':scope > .date');
+      if (!d) return;
+      var key = d.textContent.trim();
+      var body = ev.querySelector(':scope > div:not(.date)');
+      if (prev && key === prevKey && body) {
+        body.classList.add('event-more');
+        prev.querySelector(':scope > div:not(.date)').appendChild(body);
+        ev.remove();
+      } else { prev = ev; prevKey = key; }
+    });
+    delete list.dataset.grouping;
+  }
+  function run() { document.querySelectorAll('.calendar-list').forEach(group); }
+  document.addEventListener('DOMContentLoaded', run);
+  new MutationObserver(run).observe(document.documentElement, { childList: true, subtree: true });
+})();
+
+// ===== Sermons: hide descriptions that are only a web link =====
+(function () {
+  function clean() {
+    document.querySelectorAll('.sermon-body p').forEach(function (p) {
+      if (/^\s*(https?:\/\/|www\.)\S*\s*$/.test(p.textContent)) p.textContent = '';
+    });
+  }
+  new MutationObserver(clean).observe(document.documentElement, { childList: true, subtree: true });
+})();
+
+// ===== Live box: show logo + next Sunday 10:00 when not streaming (RO/EN) =====
+(function () {
+  var TZ = 'America/Los_Angeles';
+  var TXT = {
+    ro: { title: 'Următoarea transmisie live', note: 'Serviciul de duminică dimineața', btn: 'Vezi canalul YouTube' },
+    en: { title: 'Next live stream', note: 'Sunday morning service', btn: 'Visit our YouTube channel' }
+  };
+  function laNow() {
+    var p = {};
+    new Intl.DateTimeFormat('en-US', { timeZone: TZ, weekday: 'short', hour: 'numeric', minute: 'numeric', hour12: false })
+      .formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
+    return { day: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].indexOf(p.weekday), mins: (+p.hour % 24) * 60 + +p.minute };
+  }
+  function isServiceTime() { var n = laNow(); return n.day === 0 && n.mins >= 585 && n.mins <= 750; } // Sunday 9:45–12:30
+  function nextSunday() {
+    var n = laNow(), add = (7 - n.day) % 7;
+    if (add === 0 && n.mins > 750) add = 7;
+    return new Date(Date.now() + add * 864e5);
+  }
+  function when(lang) {
+    var d = new Intl.DateTimeFormat(lang === 'en' ? 'en-US' : 'ro-RO', { timeZone: TZ, weekday: 'long', day: 'numeric', month: 'long' }).format(nextSunday());
+    d = d.charAt(0).toUpperCase() + d.slice(1);
+    return lang === 'en' ? d + ' · 10:00 AM' : d + ' · ora 10:00';
+  }
+  function render() {
+    var wrap = document.querySelector('.live-embed-wrap'); if (!wrap) return;
+    var frame = wrap.querySelector('.live-embed');
+    var off = wrap.querySelector('.live-offline');
+    if (isServiceTime()) { if (off) off.remove(); if (frame) frame.style.display = ''; return; }
+    var lang = document.documentElement.lang === 'en' ? 'en' : 'ro';
+    var t = TXT[lang], key = lang + when(lang);
+    if (frame) frame.style.display = 'none';
+    if (!off) { off = document.createElement('div'); off.className = 'live-offline'; wrap.appendChild(off); }
+    if (off.dataset.key === key) return;
+    var chan = '';
+    try { chan = frame && frame.src ? new URL(frame.src).searchParams.get('channel') || '' : ''; } catch (e) {}
+    off.innerHTML = '<img src="logo.png" alt="" class="live-offline-logo">' +
+      '<p class="live-offline-eyebrow">' + t.title + '</p>' +
+      '<p class="live-offline-when">' + when(lang) + '</p>' +
+      '<p class="live-offline-note">' + t.note + '</p>' +
+      (chan ? '<a class="live-offline-btn" target="_blank" rel="noopener" href="https://www.youtube.com/channel/' + encodeURIComponent(chan) + '/live">' + t.btn + '</a>' : '');
+    off.dataset.key = key;
+  }
+  document.addEventListener('DOMContentLoaded', render);
+  new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+  // the channel link is filled in after settings load, so re-check a few times, then every minute
+  [1000, 3000, 6000].forEach(function (ms) { setTimeout(function () { var o = document.querySelector('.live-offline'); if (o) o.dataset.key = ''; render(); }, ms); });
+  setInterval(render, 60000);
+})();

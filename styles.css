@@ -516,3 +516,27 @@ footer .foot-links a:hover{ color:var(--gold-light); }
   .pcal-grid{ page-break-inside:avoid; }
   @page{ size:letter landscape; margin:0.4in; }
 }
+
+/* ===== Calendar: several events on the same day share one date box ===== */
+.event-more{margin-top:10px;padding-top:10px;border-top:1px solid var(--line);}
+
+/* ===== Live (left) + Recent sermons (right) ===== */
+.glance-grid.glance-live-sermons{grid-template-columns:1.4fr 1fr;align-items:stretch}
+@media (max-width:900px){.glance-grid.glance-live-sermons{grid-template-columns:1fr}}
+.glance-box-sermons .sermon-grid{display:flex;flex-direction:column;gap:12px;margin-bottom:14px}
+.glance-box-sermons a.sermon-card{display:flex;text-decoration:none}
+.glance-box-sermons .sermon-thumb{flex:0 0 132px;width:132px;height:auto;aspect-ratio:16/9;overflow:hidden}
+.glance-box-sermons .sermon-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.glance-box-sermons .sermon-body{padding:8px 12px}
+.glance-box-sermons .sermon-body h4{margin:4px 0 0}
+.sermon-body p:empty{display:none}
+
+/* ===== Live box when not streaming: logo + next Sunday 10:00 ===== */
+.live-offline{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;padding:20px;
+  background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:#fff}
+.live-offline-logo{width:88px;height:88px;object-fit:contain;margin-bottom:6px}
+.live-offline-eyebrow{margin:0;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-light);font-weight:600}
+.live-offline-when{margin:0;font-family:'Playfair Display',Georgia,serif;font-size:1.45rem;font-weight:700}
+.live-offline-note{margin:0;font-size:.9rem;color:rgba(255,255,255,.75)}
+.live-offline-btn{margin-top:10px;display:inline-block;padding:7px 16px;border:1px solid var(--gold);color:var(--gold-light);text-decoration:none;font-size:.8rem;letter-spacing:.06em}
+.live-offline-btn:hover{background:var(--gold);color:#fff}
