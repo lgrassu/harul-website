@@ -647,33 +647,40 @@
   }
 
   function loadSermonsFromYouTube(channelId, apiKey){
-    var cacheKey = 'yt-sermons-' + channelId;
-    var cached = getCached(cacheKey, 6 * 60 * 60 * 1000); // refresh at most every 6 hours
-    if (cached !== undefined){
-      sermonsData = cached;
-      renderSermons();
-      return;
+    // Uses the channel's uploads list (always current) instead of search (which lags and skips live streams)
+    var cacheKey = 'yt-sermons2-' + channelId;
+    var cached = getCached(cacheKey, 60 * 60 * 1000); // refresh at most every hour
+    if (cached !== undefined){ sermonsData = cached; renderSermons(); return; }
+    var GENERIC = /^\s*GRBC\s*Live\s*$/i;
+    function cleanDesc(t){
+      var l = firstLine(t, 160);
+      return /^(https?:\/\/|www\.)\S*$/.test(l) ? '' : l;
     }
-    var url = 'https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=' +
-              encodeURIComponent(channelId) + '&type=video&order=date&maxResults=3&key=' + encodeURIComponent(apiKey);
+    var url = 'https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=12' +
+              '&playlistId=' + encodeURIComponent('UU' + channelId.slice(2)) +
+              '&key=' + encodeURIComponent(apiKey);
     fetch(url).then(function(r){
       if (!r.ok) throw new Error('youtube sermons fetch failed');
       return r.json();
     }).then(function(data){
-      var items = data.items || [];
-      sermonsData = items.map(function(it){
-        var title = it.snippet ? it.snippet.title : '';
-        var desc = firstLine(it.snippet ? it.snippet.description : '', 160);
-        var published = it.snippet ? it.snippet.publishedAt : null;
-        var thumb = it.snippet && it.snippet.thumbnails && (it.snippet.thumbnails.medium || it.snippet.thumbnails.default);
+      sermonsData = (data.items || []).filter(function(it){
+        return it.contentDetails && it.contentDetails.videoPublishedAt &&
+               it.snippet.title !== 'Private video' && it.snippet.title !== 'Deleted video';
+      }).map(function(it){
+        var sn = it.snippet, title = sn.title || '', generic = GENERIC.test(title);
+        var thumb = sn.thumbnails && (sn.thumbnails.medium || sn.thumbnails.default);
+        var date = new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Los_Angeles' })
+                     .format(new Date(it.contentDetails.videoPublishedAt));
+        var desc = cleanDesc(sn.description);
         return {
-          date: published ? published.slice(0,10) : null,
-          title_ro: title, title_en: title,
+          date: date,
+          title_ro: generic ? 'Serviciu divin' : title,
+          title_en: generic ? 'Worship service' : title,
           description_ro: desc, description_en: desc,
-          videoId: it.id ? it.id.videoId : null,
+          videoId: it.contentDetails.videoId,
           thumbnail: thumb ? thumb.url : null
         };
-      }).filter(function(s){ return !!s.date; });
+      });
       setCached(cacheKey, sermonsData);
       renderSermons();
     }).catch(function(){ loadSermonsFromJson(); });
