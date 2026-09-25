@@ -812,3 +812,53 @@
   [1000, 3000, 6000].forEach(function (ms) { setTimeout(function () { var o = document.querySelector('.live-offline'); if (o) o.dataset.key = ''; render(); }, ms); });
   setInterval(render, 60000);
 })();
+
+// ===== Menu links: land exactly below the header (desktop + mobile) =====
+(function () {
+  var header = document.querySelector('header.site');
+  function headerH() { return header ? header.getBoundingClientRect().height : 0; }
+  function setVar() { document.documentElement.style.setProperty('--header-h', Math.round(headerH()) + 'px'); }
+  function targetOf(hash) {
+    if (!hash || hash.length < 2) return null;
+    try { return document.getElementById(decodeURIComponent(hash.slice(1))); } catch (e) { return null; }
+  }
+  function goTo(el, smooth) {
+    var y = el.getBoundingClientRect().top + window.pageYOffset - headerH() - 12;
+    window.scrollTo({ top: Math.max(0, y), behavior: smooth ? 'smooth' : 'auto' });
+  }
+  // Content (calendar, sermons) loads after the page opens and pushes sections down,
+  // so keep re-aiming at the target for a few seconds, until the visitor scrolls themselves.
+  function follow(el) {
+    var stop = false, until = Date.now() + 4000;
+    function cancel() { stop = true; }
+    ['wheel', 'touchstart', 'keydown', 'mousedown'].forEach(function (ev) { window.addEventListener(ev, cancel, { once: true, passive: true }); });
+    (function tick() {
+      if (stop || Date.now() > until) return;
+      var off = el.getBoundingClientRect().top - headerH() - 12;
+      if (Math.abs(off) > 2) goTo(el, false);
+      setTimeout(tick, 150);
+    })();
+  }
+  setVar();
+  window.addEventListener('resize', setVar);
+  window.addEventListener('load', setVar);
+  // Arriving from another page with a #link
+  if (location.hash) {
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    var start = function () { var el = targetOf(location.hash); if (el) { goTo(el, false); follow(el); } };
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+  }
+  // Clicking a #link on the same page (menu, buttons)
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="#"]');
+    if (!a) return;
+    var url; try { url = new URL(a.getAttribute('href'), location.href); } catch (err) { return; }
+    if (url.pathname.replace(/\/index\.html$/, '/') !== location.pathname.replace(/\/index\.html$/, '/')) return;
+    var el = targetOf(url.hash);
+    if (!el) return;
+    e.preventDefault();
+    var nav = document.querySelector('nav.links'); if (nav) nav.classList.remove('open');
+    history.pushState(null, '', url.hash);
+    goTo(el, true);
+  });
+})();

@@ -16,7 +16,7 @@
 }
 *{box-sizing:border-box;}
 html{scroll-behavior:smooth;}
-section[id]{ scroll-margin-top: 84px; }
+section[id], [id]{ scroll-margin-top: calc(var(--header-h, 84px) + 12px); }
 body{
   margin:0;
   font-family:'Source Serif 4', Georgia, serif;
@@ -544,5 +544,5 @@ footer .foot-links a:hover{ color:var(--gold-light); }
 /* ===== About section: white text card (left) + dark blue giving card (right), equal height ===== */
 #despre .about-grid{align-items:stretch}
 #despre .about-grid > div:first-child{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px 34px;box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 1px 3px rgba(20,33,61,.05)}
-#despre .give-in-about{display:block;max-width:none;margin:0;padding:32px 34px;scroll-margin-top:84px}
+#despre .give-in-about{display:block;max-width:none;margin:0;padding:32px 34px}
 #despre .give-in-about .give-methods{margin-top:16px}
