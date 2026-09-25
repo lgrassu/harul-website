@@ -3,3 +3,16 @@
 
 /images/*
   X-Robots-Tag: noindex
+
+# Always check for a newer version of pages, scripts, styles and data,
+# so website updates show up for visitors right away (images stay cached).
+/*.html
+  Cache-Control: no-cache
+/
+  Cache-Control: no-cache
+/*.js
+  Cache-Control: no-cache
+/*.css
+  Cache-Control: no-cache
+/*.json
+  Cache-Control: no-cache
