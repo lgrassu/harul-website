@@ -524,7 +524,7 @@ footer .foot-links a:hover{ color:var(--gold-light); }
 .glance-grid.glance-live-sermons{grid-template-columns:1.4fr 1fr;align-items:stretch}
 @media (max-width:900px){.glance-grid.glance-live-sermons{grid-template-columns:1fr}}
 .glance-box-sermons .sermon-grid{display:flex;flex-direction:column;gap:12px;margin-bottom:14px}
-.glance-box-sermons a.sermon-card{display:flex!important;text-decoration:none}
+.glance-box-sermons .sermon-card{display:flex!important;text-decoration:none}
 .glance-box-sermons .sermon-thumb{flex:0 0 132px;width:132px;height:auto;aspect-ratio:16/9;overflow:hidden}
 .glance-box-sermons .sermon-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .glance-box-sermons .sermon-body{padding:8px 12px}
@@ -532,7 +532,7 @@ footer .foot-links a:hover{ color:var(--gold-light); }
 .sermon-body p:empty{display:none}
 
 /* ===== Live box when not streaming: logo + next Sunday 10:00 ===== */
-.live-offline{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;padding:20px;
+.live-offline{position:relative;aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:6px;padding:20px;
   background:linear-gradient(135deg,var(--navy),var(--navy-deep));color:#fff}
 .live-offline-logo{width:88px;height:88px;object-fit:contain;margin-bottom:6px}
 .live-offline-eyebrow{margin:0;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-light);font-weight:600}
@@ -546,3 +546,11 @@ footer .foot-links a:hover{ color:var(--gold-light); }
 #despre .about-grid > div:first-child{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:32px 34px;box-shadow:inset 0 1px 0 rgba(255,255,255,.7),0 1px 3px rgba(20,33,61,.05)}
 #despre .give-in-about{display:block;max-width:none;margin:0;padding:32px 34px}
 #despre .give-in-about .give-methods{margin-top:16px}
+
+/* Live box when not streaming: grow to fit its content on small screens instead of cutting it off */
+.live-embed-wrap:has(.live-offline){padding:0!important;height:auto!important}
+@media (max-width:600px){
+  .live-offline{padding:22px 16px;gap:4px}
+  .live-offline-logo{width:60px;height:60px}
+  .live-offline-when{font-size:1.2rem}
+}
