@@ -524,7 +524,7 @@ footer .foot-links a:hover{ color:var(--gold-light); }
 .glance-grid.glance-live-sermons{grid-template-columns:1.4fr 1fr;align-items:stretch}
 @media (max-width:900px){.glance-grid.glance-live-sermons{grid-template-columns:1fr}}
 .glance-box-sermons .sermon-grid{display:flex;flex-direction:column;gap:12px;margin-bottom:14px}
-.glance-box-sermons a.sermon-card{display:flex;text-decoration:none}
+.glance-box-sermons a.sermon-card{display:flex!important;text-decoration:none}
 .glance-box-sermons .sermon-thumb{flex:0 0 132px;width:132px;height:auto;aspect-ratio:16/9;overflow:hidden}
 .glance-box-sermons .sermon-thumb img{width:100%;height:100%;object-fit:cover;display:block}
 .glance-box-sermons .sermon-body{padding:8px 12px}
