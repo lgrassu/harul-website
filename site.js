@@ -1,6 +1,7 @@
 (function(){
   var I18N = {
     ro: {
+      "meta.title":"Biserica Baptistă Harul — Grace Romanian Baptist Church, Sacramento",
       "nav.acasa":"Acasă","nav.despre":"Despre noi","nav.program":"Program","nav.evenimente":"Evenimente","nav.predici":"Predici","nav.board":"Conducere","nav.daruire":"Dăruire","nav.contact":"Contact",
       "brand.short":"Biserica Baptistă Harul","brand.full":"Biserica Baptistă Harul din Sacramento",
 
@@ -58,6 +59,7 @@
       "footer.rights":"Toate drepturile rezervate."
     },
     en: {
+      "meta.title":"Grace Romanian Baptist Church of Sacramento — Biserica Baptistă Harul",
       "nav.acasa":"Home","nav.despre":"About","nav.program":"Service Times","nav.evenimente":"Events","nav.predici":"Sermons","nav.board":"Leadership","nav.daruire":"Give","nav.contact":"Contact",
       "brand.short":"Grace Romanian Baptist Church","brand.full":"Grace Romanian Baptist Church of Sacramento",
 
@@ -127,6 +129,8 @@
 
   function applyLang(){
     document.documentElement.lang = currentLang;
+    var pageTitle = I18N[currentLang]['meta.title'];
+    if (pageTitle) document.title = pageTitle;
     document.querySelectorAll('[data-lang-btn]').forEach(function(btn){
       btn.classList.toggle('active', btn.getAttribute('data-lang-btn') === currentLang);
     });
