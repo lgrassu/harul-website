@@ -554,3 +554,46 @@ footer .foot-links a:hover{ color:var(--gold-light); }
   .live-offline-logo{width:60px;height:60px}
   .live-offline-when{font-size:1.2rem}
 }
+
+/* ===== Small-screen fixes (phones) ===== */
+
+/* The month label carried an inline min-width that left no room for the
+   arrow buttons on a phone, so they wrapped onto their own lines. */
+#pcal-month-label{ margin:0; min-width:220px; text-align:center; }
+#pcal-print{ margin-left:auto; }
+
+@media (max-width:700px){
+  /* The two arrows inherit .btn's wide padding, which left no room for the
+     month label beside them, so the controls wrapped onto four lines. */
+  .print-cal-toolbar{ gap:10px; justify-content:center; }
+  .print-cal-toolbar #pcal-prev,
+  .print-cal-toolbar #pcal-next{ padding:12px 18px; }
+  #pcal-print{ margin-left:0; width:100%; }
+
+  /* The seven-column month grid is wider than a phone. It used to be
+     clipped by overflow:hidden, which made Saturday unreachable; now the
+     wrapper scrolls sideways instead. */
+  .print-cal-wrap{ overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .pcal-grid{ min-width:560px; }
+
+  /* Keep ← month → on one row. */
+  #pcal-month-label{ min-width:0; font-size:1.15rem; }
+
+  /* Footer menu and language toggle were ~15px and ~25px tall; too small
+     to tap accurately. */
+  footer .foot-links a{ display:inline-block; padding:12px 14px; margin:0; }
+  .lang-toggle button{ padding:11px 16px; }
+}
+
+@media (max-width:480px){
+  /* The full church name wraps to four lines at this width and swamps the
+     header. The logo mark beside it still links home. */
+  header.site .brand span[data-i18n]{ display:none; }
+}
+
+@media print{
+  /* Never scroll or stretch the grid on paper. */
+  .print-cal-wrap{ overflow-x:visible; }
+  .pcal-grid{ min-width:0; }
+  #pcal-month-label{ min-width:0; }
+}
