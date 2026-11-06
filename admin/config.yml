@@ -132,3 +132,61 @@ collections:
           - { label: "Google Calendar ID", name: "google_calendar_id", widget: "string", required: false, hint: "Programul recurent (duminici, miercuri, vineri) — se preia automat din Google Calendar, nu de aici." }
           - { label: "Google API Key (Calendar + YouTube)", name: "google_api_key", widget: "string", required: false, hint: "Din Google Cloud Console → Credentials. Activați atât Calendar API cât și YouTube Data API v3 pe această cheie." }
           - { label: "ID canal YouTube", name: "youtube_channel_id", widget: "string", required: false, hint: "Găsit în adresa canalului: youtube.com/channel/ACEST-ID" }
+
+  # Written by the Apps Script from the Credo Translation email.
+  # Editors review, fix any mishearings, then flip "Publicat" to show it.
+  - name: "sermon-notes"
+    label: "Rezumate predici / Sermon notes"
+    folder: "sermons"
+    extension: "json"
+    format: "json"
+    create: false
+    delete: true
+    identifier_field: "service_date"
+    summary: "{{service_date}} — {{ro.title}}"
+    sortable_fields: ["service_date"]
+    fields:
+      - { label: "Data serviciului", name: "service_date", widget: "string" }
+      - { label: "Publicat pe site / Published", name: "published", widget: "boolean", default: false }
+      - label: "Română"
+        name: "ro"
+        widget: "object"
+        fields:
+          - { label: "Titlu", name: "title", widget: "string" }
+          - { label: "Tema", name: "theme", widget: "text" }
+          - { label: "Pe scurt", name: "summary", widget: "text" }
+          - label: "Ideile principale"
+            name: "points"
+            widget: "list"
+            summary: "{{fields.heading}}"
+            fields:
+              - { label: "Titlu", name: "heading", widget: "string", required: false }
+              - { label: "Conținut", name: "body", widget: "text" }
+          - label: "Versete-cheie"
+            name: "key_verses"
+            widget: "list"
+            field: { label: "Verset", name: "verse", widget: "string" }
+          - { label: "Pentru săptămâna aceasta", name: "application", widget: "text", required: false }
+      - label: "English"
+        name: "en"
+        widget: "object"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Theme", name: "theme", widget: "text" }
+          - { label: "In short", name: "summary", widget: "text" }
+          - label: "Main points"
+            name: "points"
+            widget: "list"
+            summary: "{{fields.heading}}"
+            fields:
+              - { label: "Heading", name: "heading", widget: "string", required: false }
+              - { label: "Body", name: "body", widget: "text" }
+          - label: "Key verses"
+            name: "key_verses"
+            widget: "list"
+            field: { label: "Verse", name: "verse", widget: "string" }
+          - { label: "For this week", name: "application", widget: "text", required: false }
+      # Kept so Decap does not strip them when an editor saves.
+      - { label: "schema", name: "schema", widget: "hidden", default: "credo.sermon.v1" }
+      - { label: "source_format", name: "source_format", widget: "hidden", required: false }
+      - { label: "email_received", name: "email_received", widget: "hidden", required: false }

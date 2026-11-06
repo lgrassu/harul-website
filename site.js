@@ -2,6 +2,14 @@
   var I18N = {
     ro: {
       "meta.title":"Biserica Baptistă Harul — Grace Romanian Baptist Church, Sacramento",
+      "pred.eyebrow":"Rezumatul predicii","pred.theme":"Tema","pred.summary":"Pe scurt",
+      "pred.points":"Ideile principale","pred.verses":"Versete-cheie",
+      "pred.apply":"Pentru săptămâna aceasta","pred.backToList":"Toate predicile",
+      "pred.missing":"Nu am găsit rezumatul pentru această dată.",
+      "pred.draftTitle":"Ciornă — nepublicată",
+      "pred.draftBody":"Această pagină nu este încă publicată. O vede doar cine are linkul.",
+      "pred.autoNote":"Rezumat generat automat din traducerea în timp real; poate conține mici greșeli.",
+      "pred.readNotes":"Rezumatul predicii",
       "nav.acasa":"Acasă","nav.despre":"Despre noi","nav.program":"Program","nav.evenimente":"Evenimente","nav.predici":"Predici","nav.board":"Conducere","nav.daruire":"Dăruire","nav.contact":"Contact",
       "brand.short":"Biserica Baptistă Harul","brand.full":"Biserica Baptistă Harul din Sacramento",
 
@@ -60,6 +68,14 @@
     },
     en: {
       "meta.title":"Grace Romanian Baptist Church of Sacramento — Biserica Baptistă Harul",
+      "pred.eyebrow":"Sermon summary","pred.theme":"Theme","pred.summary":"In short",
+      "pred.points":"Main points","pred.verses":"Key verses",
+      "pred.apply":"For this week","pred.backToList":"All sermons",
+      "pred.missing":"No summary found for this date.",
+      "pred.draftTitle":"Draft — not published",
+      "pred.draftBody":"This page is not published yet. Only someone with the link can see it.",
+      "pred.autoNote":"Summary generated automatically from the live translation; it may contain small errors.",
+      "pred.readNotes":"Sermon summary",
       "nav.acasa":"Home","nav.despre":"About","nav.program":"Service Times","nav.evenimente":"Events","nav.predici":"Sermons","nav.board":"Leadership","nav.daruire":"Give","nav.contact":"Contact",
       "brand.short":"Grace Romanian Baptist Church","brand.full":"Grace Romanian Baptist Church of Sacramento",
 

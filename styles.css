@@ -597,3 +597,52 @@ footer .foot-links a:hover{ color:var(--gold-light); }
   .pcal-grid{ min-width:0; }
   #pcal-month-label{ min-width:0; }
 }
+
+/* ===== Sermon notes page ===== */
+.sermon-notes{ padding:48px 0 72px; }
+.pred-block{ margin:0 0 34px; }
+.pred-block h2{
+  font-family:'Source Serif 4'; font-size:.78rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:.12em; color:var(--gold-dark);
+  margin:0 0 10px;
+}
+.pred-block p{ margin:0; max-width:68ch; }
+.pred-points{ margin:0; padding-left:1.3em; max-width:68ch; }
+.pred-points li{ margin:0 0 16px; }
+.pred-points li strong{ color:var(--navy); }
+.pred-verses{
+  list-style:none; margin:0; padding:0;
+  display:flex; flex-wrap:wrap; gap:8px;
+}
+.pred-verses li{
+  background:var(--cream); border:1px solid var(--line); border-radius:999px;
+  padding:5px 13px; font-size:.82rem; color:var(--navy);
+}
+.pred-note{
+  margin:34px 0 24px; font-size:.82rem; font-style:italic;
+  color:rgba(0,0,0,.55); max-width:68ch;
+}
+.pred-draft{
+  background:#f9eeda; border:1px solid var(--gold); border-radius:var(--radius);
+  padding:14px 18px; margin:0 0 32px; font-size:.9rem;
+}
+.pred-draft strong{ display:block; color:var(--navy); margin-bottom:3px; }
+.pred-missing{ padding:24px 0 40px; }
+.pred-missing p{ margin:0 0 18px; }
+
+/* .btn-ghost is built for dark backgrounds (white text, pale border). On the
+   cream notes page it was invisible, so give it the page's own colours. */
+.sermon-notes .btn-ghost,
+.pred-missing .btn-ghost{
+  color:var(--navy); border-color:var(--line); background:transparent;
+}
+.sermon-notes .btn-ghost:hover,
+.pred-missing .btn-ghost:hover{ border-color:var(--gold); color:var(--burgundy); }
+
+/* The link from a sermon in the list through to its notes. */
+.sermon-notes-link{
+  display:inline-block; margin-top:6px; font-size:.8rem; font-weight:600;
+  color:var(--gold-dark); text-decoration:none;
+  border-bottom:1px solid currentColor;
+}
+.sermon-notes-link:hover{ color:var(--navy); }

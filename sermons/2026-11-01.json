@@ -1,0 +1,105 @@
+{
+  "schema": "credo.sermon.v1",
+  "source_format": "prose",
+  "service_date": "2026-11-01",
+  "email_received": "2026-11-01T22:15:41.000Z",
+  "published": false,
+  "en": {
+    "title": "New Testament Baptism: What It Is and What It Symbolizes",
+    "theme": "When a person goes into the water of baptism, is it only a church ritual or a divine command, and what do the immersion and the coming up out of the water symbolize?",
+    "summary": "On a baptism Sunday, the pastor let Scripture explain what baptism is: a command of the Lord Jesus, given to those who have repented and believe, and the public testimony of a clean conscience. He then showed what it symbolizes: death to the old life and resurrection to a new one, a new identity in Christ, and joining the body of Christ, the church.",
+    "points": [
+      {
+        "heading": "Baptism is commanded by Jesus",
+        "body": "We baptize because the Lord Jesus commanded it (Matthew 28:19), and the early church obeyed that command (Acts 2:38). Baptism by itself does not save or give new birth. Simon in Samaria was baptized but had nothing to do with God. Repentance and personal faith in Christ must come first."
+      },
+      {
+        "heading": "Baptism is a deliberate act of a mature believer",
+        "body": "We do not baptize infants, because Scripture does not teach it. Jesus Himself, though sinless, was baptized at about thirty as an example, and the eunuch was told, \"If you believe with all your heart, you may.\" Baptism is a conscious decision by someone who confesses Jesus as personal Lord and Savior."
+      },
+      {
+        "heading": "Baptism is the testimony of a clean conscience",
+        "body": "According to 1 Peter 3:21, baptism is the visible, public proof before the church of a personal meeting with Christ. A relationship with God is not inherited from parents or grandparents. Each person must repent and believe for himself and then live a transformed life, not a ritual."
+      },
+      {
+        "heading": "Baptism symbolizes death and resurrection",
+        "body": "Going under the water means dying to the world and to sin, and coming up means rising to a new life with Christ (Romans 6:3-4). So a believer must not play with sin. Like Jesus, who answered temptation with \"It is written,\" we overcome by being filled with the Spirit and with God's Word."
+      },
+      {
+        "heading": "Baptism marks a new identity",
+        "body": "Those baptized into Christ have clothed themselves with Christ (Galatians 3:27). We now copy Him, the perfect example. An identity built on anything other than Christ and the Gospel ends in bankruptcy, but in Christ even the one who falls is lifted up again."
+      },
+      {
+        "heading": "Baptism means joining the church",
+        "body": "We were all baptized by one Spirit into one body (1 Corinthians 12:13). Individualism disappears, and every member has at least one gift to use for Christ's glory and for building up the church."
+      }
+    ],
+    "key_verses": [
+      "Matthew 28:19",
+      "Acts 2:38",
+      "Acts 8:13",
+      "Acts 17:30",
+      "Luke 3:21-23",
+      "Acts 8:36-37",
+      "1 Peter 3:21",
+      "2 Timothy 3:15",
+      "Romans 6:3-4",
+      "Romans 8:12",
+      "Hebrews 4:15",
+      "Matthew 4:4",
+      "Psalm 119:11",
+      "Galatians 3:27",
+      "Matthew 11:29"
+    ],
+    "application": "When you are tempted, remember that your old self was buried and you belong entirely to Christ: do not compromise or negotiate with sin, and get actively involved in the church with your gifts. Carry the newly baptized in prayer. If you have not yet repented, receive Christ now, and if you have, do not delay baptism."
+  },
+  "ro": {
+    "title": "Botezul nou-testamental: ce este și ce simbolizează",
+    "theme": "Atunci când un om intră în apa botezului, este doar un ritual bisericesc sau o poruncă divină, și ce simbolizează scufundarea în apă și ieșirea din apă?",
+    "summary": "Într-o duminică de botez, păstorul a lăsat Scriptura să răspundă ce este botezul. Este o poruncă a Domnului Isus, pentru cei care s-au pocăit și cred, și mărturia unui cuget curat. Apoi a arătat ce simbolizează: moartea față de viața veche și învierea la o viață nouă, o identitate nouă în Hristos și integrarea în trupul lui Hristos, biserica.",
+    "points": [
+      {
+        "heading": "Botezul este poruncit de Domnul Isus",
+        "body": "Botezăm pentru că Domnul Isus a poruncit: „Duceți-vă și faceți ucenici din toate neamurile, botezându-i…” (Matei 28:19), iar biserica primară a ascultat (Fapte 2:38). Botezul în sine nu mântuiește. Simon din Samaria a fost botezat, dar n-avea nimic de-a face cu Dumnezeu. Mai întâi vine pocăința și credința personală în Hristos."
+      },
+      {
+        "heading": "Botezul este un act conștient, la maturitate",
+        "body": "Nu botezăm copiii, pentru că Scriptura nu ne învață acest lucru. Domnul Isus, deși fără păcat, s-a botezat pe la 30 de ani ca să ne dea un exemplu. Famenului i s-a spus: „Dacă crezi din toată inima, se poate.” Botezul îl cere cel care mărturisește conștient că Isus este Domnul și Mântuitorul lui personal."
+      },
+      {
+        "heading": "Botezul este mărturia unui cuget curat",
+        "body": "Botezul este dovada publică, vizibilă înaintea bisericii, a întâlnirii personale cu Hristos (1 Petru 3:21). Relația cu Dumnezeu nu se moștenește. Părinții și bunicii nu se pot pocăi în locul nostru. Suntem chemați să trăim o viață transformată, nu un ritual."
+      },
+      {
+        "heading": "Botezul simbolizează moartea și învierea",
+        "body": "Scufundarea în apă înseamnă moartea față de lume și păcat, iar ieșirea din apă înseamnă învierea la o viață nouă cu Hristos (Romani 6:3-4). De aceea nu avem voie să cochetăm cu păcatul. Asemenea Domnului Isus, care a răspuns ispitei cu „Este scris”, biruim fiind plini de Duhul și de Cuvântul lui Dumnezeu."
+      },
+      {
+        "heading": "Botezul arată o identitate nouă",
+        "body": "„Toți care ați fost botezați pentru Hristos v-ați îmbrăcat cu Hristos” (Galateni 3:27). Chemarea noastră este să-L copiem pe Hristos, exemplul desăvârșit. O identitate clădită pe altceva decât Hristos și Evanghelia ajunge la faliment, dar în El cel neprihănit, chiar dacă de șapte ori cade, se ridică."
+      },
+      {
+        "heading": "Botezul înseamnă integrarea în biserică",
+        "body": "Am fost botezați de un singur Duh ca să alcătuim un singur trup (1 Corinteni 12:13). Individualismul dispare, iar fiecare mădular are cel puțin un dar de folosit pentru slava lui Hristos și zidirea bisericii."
+      }
+    ],
+    "key_verses": [
+      "Matei 28:19",
+      "Fapte 2:38",
+      "Fapte 8:13",
+      "Fapte 17:30",
+      "Luca 3:21-23",
+      "Fapte 8:36-37",
+      "1 Petru 3:21",
+      "2 Timotei 3:15",
+      "Romani 6:3-4",
+      "Romani 8:12",
+      "Evrei 4:15",
+      "Matei 4:4",
+      "Psalmul 119:11",
+      "Galateni 3:27",
+      "Matei 11:29"
+    ],
+    "application": "Când ești ispitit, adu-ți aminte că omul cel vechi a fost îngropat și că ești în totalitate al lui Hristos: nu te compromite, nu negocia cu păcatul și implică-te activ în biserică cu darurile tale. Purtați-i pe brațe de rugăciune pe cei botezați. Dacă nu te-ai pocăit încă, primește-L acum pe Hristos, iar dacă te-ai pocăit, nu amâna botezul."
+  }
+}
