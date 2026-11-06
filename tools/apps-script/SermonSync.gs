@@ -28,6 +28,7 @@
  */
 
 var CFG = {
+  CHURCH_ID: 'harul',           // must match church_id in Credo's JSON
   SENDER: 'admin@credotranslation.com',
   SUBJECT_HINT: 'Sermon summary',
   LABEL_DONE: 'credo/processed',
@@ -116,12 +117,29 @@ function readJsonAttachment_(msg) {
     try {
       var d = JSON.parse(a.getDataAsString('UTF-8'));
       if (!d.en || !d.ro) continue;             // not the shape we expect
+
+      // Credo sends church_id; refuse anything not addressed to this church.
+      if (d.church_id && d.church_id !== CFG.CHURCH_ID) {
+        throw new Error('Email is for church_id "' + d.church_id +
+                        '", expected "' + CFG.CHURCH_ID + '".');
+      }
+
+      // "passage" may arrive per-language (book names differ: Galatians /
+      // Galateni) or once at the top level. Normalise onto both blocks.
+      ['en', 'ro'].forEach(function (L) {
+        if (!d[L].passage && d.passage) d[L].passage = d.passage;
+      });
+
       d.source_format = 'json';
       d.email_received = msg.getDate().toISOString();
       if (d.published === undefined) d.published = false;
       if (!d.service_date) d.service_date = dateFromSubject_(msg.getSubject());
       return d;
-    } catch (e) { /* fall through to prose */ }
+    } catch (e) {
+      // A church_id mismatch is a real problem worth surfacing, not something
+      // to paper over by falling back to the prose parser.
+      if (e.message && e.message.indexOf('church_id') !== -1) throw e;
+    }
   }
   return null;
 }

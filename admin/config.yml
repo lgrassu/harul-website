@@ -153,6 +153,7 @@ collections:
         widget: "object"
         fields:
           - { label: "Titlu", name: "title", widget: "string" }
+          - { label: "Pasajul biblic", name: "passage", widget: "string", required: false }
           - { label: "Tema", name: "theme", widget: "text" }
           - { label: "Pe scurt", name: "summary", widget: "text" }
           - label: "Ideile principale"
@@ -172,6 +173,7 @@ collections:
         widget: "object"
         fields:
           - { label: "Title", name: "title", widget: "string" }
+          - { label: "Bible passage", name: "passage", widget: "string", required: false }
           - { label: "Theme", name: "theme", widget: "text" }
           - { label: "In short", name: "summary", widget: "text" }
           - label: "Main points"
@@ -187,6 +189,8 @@ collections:
             field: { label: "Verse", name: "verse", widget: "string" }
           - { label: "For this week", name: "application", widget: "text", required: false }
       # Kept so Decap does not strip them when an editor saves.
+      - { label: "passage", name: "passage", widget: "hidden", required: false }
+      - { label: "church_id", name: "church_id", widget: "hidden", required: false }
       - { label: "schema", name: "schema", widget: "hidden", default: "credo.sermon.v1" }
       - { label: "source_format", name: "source_format", widget: "hidden", required: false }
       - { label: "email_received", name: "email_received", widget: "hidden", required: false }

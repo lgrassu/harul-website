@@ -629,6 +629,7 @@ footer .foot-links a:hover{ color:var(--gold-light); }
 .pred-draft strong{ display:block; color:var(--navy); margin-bottom:3px; }
 .pred-missing{ padding:24px 0 40px; }
 .pred-missing p{ margin:0 0 18px; }
+.pred-passage:not([hidden])::before{ content:" · "; opacity:.6; }
 
 /* .btn-ghost is built for dark backgrounds (white text, pale border). On the
    cream notes page it was invisible, so give it the page's own colours. */

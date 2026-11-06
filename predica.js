@@ -64,6 +64,12 @@
     el('pred-date').textContent = data.service_date
       ? formatDate(data.service_date, L) : '';
 
+    // Credo sends the Bible passage only when the sermon has one.
+    var passage = side.passage || data.passage || '';
+    var pEl = el('pred-passage');
+    pEl.textContent = passage;
+    pEl.hidden = !passage;
+
     setBlock('pred-theme', 'pred-theme-block', side.theme);
     setBlock('pred-summary', 'pred-summary-block', side.summary);
     setBlock('pred-apply', 'pred-apply-block', side.application);
@@ -94,7 +100,9 @@
     });
     el('pred-verses-block').hidden = vs.length === 0;
 
-    el('pred-draft').hidden = data.published !== false;
+    // Absent "published" counts as a draft. A published note that loses the
+    // field just shows a banner; a draft that loses it must not go public.
+    el('pred-draft').hidden = data.published === true;
     el('pred-missing').hidden = true;
     el('pred-body').hidden = false;
 
